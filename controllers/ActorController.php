@@ -4,7 +4,7 @@ class actor{
     //Listar en el API
     public function index(){
         //Obtener el listado del Modelo
-        $genero=new ActorModel();
+        $genero=new Usuario();
         $response=$genero->all();
         //Si hay respuesta
         if(isset($response) && !empty($response)){
@@ -25,7 +25,7 @@ class actor{
     }
     public function get($param){
         
-        $genero=new ActorModel();
+        $genero=new Usuario();
         $response=$genero->get($param);
         $json=array(
             'status'=>200,
@@ -47,9 +47,9 @@ class actor{
             );
         
     }
-    public function getActorMovie($id){
-        $genero=new ActorModel();
-        $response=$genero->getActorMovie($id);
+    public function getUsuarioById($id){
+        $genero=new Usuario();
+        $response=$genero->getUsuarioById($id);
         //Si hay respuesta
         if(isset($response) && !empty($response)){
             //Armar el json
