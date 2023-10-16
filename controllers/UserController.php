@@ -76,4 +76,56 @@ class user
             http_response_code($json["status"])
         );
     }
+
+    public function create()
+    {
+        $inputJSON = file_get_contents('php://input');
+        $object = json_decode($inputJSON);
+        $material = new UserModel();
+        $response = $material->create($object);
+        if (isset($response) && !empty($response)) {
+            $json = array(
+                'status' => 200,
+                'total' => count($response),
+                'results' => $response[0]
+            );
+        } else {
+            $json = array(
+                'status' => 400,
+                'total' => 0,
+                'results' => "No hay registros"
+            );
+        }
+        echo json_encode(
+            $json,
+            http_response_code($json["status"])
+        );
+
+    }
+
+    public function update()
+    {
+        $inputJSON = file_get_contents('php://input');
+        $object = json_decode($inputJSON);
+        $material = new UserModel();
+        $response = $material->update($object);
+        if (isset($response) && !empty($response)) {
+            $json = array(
+                'status' => 200,
+                'total' => count($response),
+                'results' => $response[0]
+            );
+        } else {
+            $json = array(
+                'status' => 400,
+                'total' => 0,
+                'results' => "No hay registros"
+            );
+        }
+        echo json_encode(
+            $json,
+            http_response_code($json["status"])
+        );
+
+    }
 }

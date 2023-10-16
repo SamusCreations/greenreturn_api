@@ -53,24 +53,49 @@ class collection_center
 
     }
 
-    public function getMaterialCollection($id)
+    public function create()
     {
-
-        $center = new CollectionCenterModel();
-        $response = $center->getMaterialCollection($id);
-        $json = array(
-            'status' => 200,
-            'results' => $response
-        );
+        $inputJSON = file_get_contents('php://input');
+        $object = json_decode($inputJSON);
+        $CollectionCenter = new CollectionCenterModel();
+        $response = $CollectionCenter->create($object);
         if (isset($response) && !empty($response)) {
             $json = array(
                 'status' => 200,
-                'results' => $response
+                'total' => count($response),
+                'results' => $response[0]
             );
         } else {
             $json = array(
                 'status' => 400,
-                'results' => "No existe el Collection Center"
+                'total' => 0,
+                'results' => "No hay registros"
+            );
+        }
+        echo json_encode(
+            $json,
+            http_response_code($json["status"])
+        );
+
+    }
+
+    public function update()
+    {
+        $inputJSON = file_get_contents('php://input');
+        $object = json_decode($inputJSON);
+        $CollectionCenter = new CollectionCenterModel();
+        $response = $CollectionCenter->update($object);
+        if (isset($response) && !empty($response)) {
+            $json = array(
+                'status' => 200,
+                'total' => count($response),
+                'results' => $response[0]
+            );
+        } else {
+            $json = array(
+                'status' => 400,
+                'total' => 0,
+                'results' => "No hay registros"
             );
         }
         echo json_encode(
