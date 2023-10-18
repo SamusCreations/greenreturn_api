@@ -13,14 +13,28 @@ header("Access-Control-Allow-Methods: *");
 require_once "models/MySqlConnect.php";
 
 /***--- Agregar todos los modelos*/
+require_once "models/CantonModel.php";
 require_once "models/CollectionCenterModel.php";
+require_once "models/CouponModel.php";
+require_once "models/DistrictModel.php";
+require_once "models/ExchangeDetailModel.php";
+require_once "models/MaterialExchangeModel.php";
 require_once "models/MaterialModel.php";
+require_once "models/ProvinceModel.php";
 require_once "models/UserModel.php";
 
+
 /***--- Agregar todos los controladores*/
+require_once "controllers/CantonController.php";
 require_once "controllers/CollectionCenterController.php";
-require_once "controllers/UserController.php";
+require_once "controllers/CouponController.php";
+require_once "controllers/DistrictController.php";
+require_once "controllers/ExchangeDetailController.php";
+require_once "controllers/MaterialExchangeController.php";
 require_once "controllers/MaterialController.php";
+require_once "controllers/ProvinceController.php";
+require_once "controllers/UserController.php";
+
 
 //Enrutador
 //RoutesController.php
