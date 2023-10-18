@@ -1,5 +1,5 @@
 <?php
-class ProvinceModel
+class CantonModel
 {
     private $enlace; // Objeto para la conexión a la base de datos
 
@@ -13,20 +13,20 @@ class ProvinceModel
     }
 
     /**
-     * Obtiene todas las provincias de la base de datos.
+     * Obtiene todos los cantones de la base de datos.
      *
-     * @return array|false Retorna un array de objetos Province o false en caso de error.
+     * @return array|false Retorna un array de objetos Canton o false en caso de error.
      */
     public function all()
     {
         try {
             // Consulta SQL
-            $vSql = "SELECT * FROM province";
+            $vSql = "SELECT * FROM canton";
 
             // Ejecutar la consulta
             $vResultado = $this->enlace->ExecuteSQL($vSql);
 
-            // Retornar el resultado como un array de objetos Province
+            // Retornar el resultado como un array de objetos Canton
             return $vResultado;
         } catch (Exception $e) {
             die($e->getMessage());
@@ -34,21 +34,21 @@ class ProvinceModel
     }
 
     /**
-     * Obtiene una provincia por su ID.
+     * Obtiene un cantón por su ID.
      *
-     * @param int $id El ID de la provincia a buscar.
-     * @return object|false Retorna un objeto Province o false en caso de error o si no se encuentra la provincia.
+     * @param int $id El ID del cantón a buscar.
+     * @return object|false Retorna un objeto Canton o false en caso de error o si no se encuentra el cantón.
      */
     public function get($id)
     {
         try {
             // Consulta SQL
-            $vSql = "SELECT * FROM province WHERE id_province=$id";
+            $vSql = "SELECT * FROM canton WHERE id_canton=$id";
 
             // Ejecutar la consulta
             $vResultado = $this->enlace->ExecuteSQL($vSql);
 
-            // Retornar el resultado como un objeto Province
+            // Retornar el resultado como un objeto Canton
             return $vResultado;
         } catch (Exception $e) {
             die($e->getMessage());
@@ -56,21 +56,21 @@ class ProvinceModel
     }
 
     /**
-     * Crea una nueva provincia en la base de datos.
+     * Crea un nuevo cantón en la base de datos.
      *
-     * @param object $objeto Un objeto Province con los datos de la nueva provincia.
-     * @return object|false Retorna un objeto Province recién creado o false en caso de error.
+     * @param object $objeto Un objeto Canton con los datos del nuevo cantón.
+     * @return object|false Retorna un objeto Canton recién creado o false en caso de error.
      */
     public function create($objeto)
     {
         try {
             // Consulta SQL
-            $vSql = "INSERT INTO province (id_province, name) VALUES ('$objeto->id_province', '$objeto->name')";
+            $vSql = "INSERT INTO canton (id_province, id_canton, name) VALUES ('$objeto->id_province', '$objeto->id_canton', '$objeto->name')";
 
             // Ejecutar la consulta
             $vResultado = $this->enlace->executeSQL_DML_last($vSql);
 
-            // Retornar la provincia recién creada
+            // Retornar el cantón recién creado
             return $this->get($vResultado);
         } catch (Exception $e) {
             die($e->getMessage());
@@ -78,22 +78,22 @@ class ProvinceModel
     }
 
     /**
-     * Actualiza una provincia existente en la base de datos.
+     * Actualiza un cantón existente en la base de datos.
      *
-     * @param object $objeto Un objeto Province con los datos actualizados de la provincia.
-     * @return object|false Retorna un objeto Province actualizado o false en caso de error.
+     * @param object $objeto Un objeto Canton con los datos actualizados del cantón.
+     * @return object|false Retorna un objeto Canton actualizado o false en caso de error.
      */
     public function update($objeto)
     {
         try {
             // Consulta SQL
-            $vSql = "UPDATE province SET name='$objeto->name' WHERE id_province=$objeto->id_province";
+            $vSql = "UPDATE canton SET name='$objeto->name' WHERE id_canton=$objeto->id_canton";
 
             // Ejecutar la consulta
             $vResultado = $this->enlace->executeSQL_DML($vSql);
 
-            // Retornar la provincia actualizada
-            return $this->get($objeto->id_province);
+            // Retornar el cantón actualizado
+            return $this->get($objeto->id_canton);
         } catch (Exception $e) {
             die($e->getMessage());
         }

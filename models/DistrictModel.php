@@ -1,5 +1,5 @@
 <?php
-class ProvinceModel
+class DistrictModel
 {
     private $enlace; // Objeto para la conexión a la base de datos
 
@@ -13,20 +13,20 @@ class ProvinceModel
     }
 
     /**
-     * Obtiene todas las provincias de la base de datos.
+     * Obtiene todos los distritos de la base de datos.
      *
-     * @return array|false Retorna un array de objetos Province o false en caso de error.
+     * @return array|false Retorna un array de objetos District o false en caso de error.
      */
     public function all()
     {
         try {
             // Consulta SQL
-            $vSql = "SELECT * FROM province";
+            $vSql = "SELECT * FROM district";
 
             // Ejecutar la consulta
             $vResultado = $this->enlace->ExecuteSQL($vSql);
 
-            // Retornar el resultado como un array de objetos Province
+            // Retornar el resultado como un array de objetos District
             return $vResultado;
         } catch (Exception $e) {
             die($e->getMessage());
@@ -34,21 +34,21 @@ class ProvinceModel
     }
 
     /**
-     * Obtiene una provincia por su ID.
+     * Obtiene un distrito por su ID.
      *
-     * @param int $id El ID de la provincia a buscar.
-     * @return object|false Retorna un objeto Province o false en caso de error o si no se encuentra la provincia.
+     * @param int $id El ID del distrito a buscar.
+     * @return object|false Retorna un objeto District o false en caso de error o si no se encuentra el distrito.
      */
     public function get($id)
     {
         try {
             // Consulta SQL
-            $vSql = "SELECT * FROM province WHERE id_province=$id";
+            $vSql = "SELECT * FROM district WHERE id_district=$id";
 
             // Ejecutar la consulta
             $vResultado = $this->enlace->ExecuteSQL($vSql);
 
-            // Retornar el resultado como un objeto Province
+            // Retornar el resultado como un objeto District
             return $vResultado;
         } catch (Exception $e) {
             die($e->getMessage());
@@ -56,21 +56,21 @@ class ProvinceModel
     }
 
     /**
-     * Crea una nueva provincia en la base de datos.
+     * Crea un nuevo distrito en la base de datos.
      *
-     * @param object $objeto Un objeto Province con los datos de la nueva provincia.
-     * @return object|false Retorna un objeto Province recién creado o false en caso de error.
+     * @param object $objeto Un objeto District con los datos del nuevo distrito.
+     * @return object|false Retorna un objeto District recién creado o false en caso de error.
      */
     public function create($objeto)
     {
         try {
             // Consulta SQL
-            $vSql = "INSERT INTO province (id_province, name) VALUES ('$objeto->id_province', '$objeto->name')";
+            $vSql = "INSERT INTO district (id_province, id_canton, id_district, name) VALUES ('$objeto->id_province', '$objeto->id_canton', '$objeto->id_district', '$objeto->name')";
 
             // Ejecutar la consulta
             $vResultado = $this->enlace->executeSQL_DML_last($vSql);
 
-            // Retornar la provincia recién creada
+            // Retornar el distrito recién creado
             return $this->get($vResultado);
         } catch (Exception $e) {
             die($e->getMessage());
@@ -78,22 +78,22 @@ class ProvinceModel
     }
 
     /**
-     * Actualiza una provincia existente en la base de datos.
+     * Actualiza un distrito existente en la base de datos.
      *
-     * @param object $objeto Un objeto Province con los datos actualizados de la provincia.
-     * @return object|false Retorna un objeto Province actualizado o false en caso de error.
+     * @param object $objeto Un objeto District con los datos actualizados del distrito.
+     * @return object|false Retorna un objeto District actualizado o false en caso de error.
      */
     public function update($objeto)
     {
         try {
             // Consulta SQL
-            $vSql = "UPDATE province SET name='$objeto->name' WHERE id_province=$objeto->id_province";
+            $vSql = "UPDATE district SET name='$objeto->name' WHERE id_district=$objeto->id_district";
 
             // Ejecutar la consulta
             $vResultado = $this->enlace->executeSQL_DML($vSql);
 
-            // Retornar la provincia actualizada
-            return $this->get($objeto->id_province);
+            // Retornar el distrito actualizado
+            return $this->get($objeto->id_district);
         } catch (Exception $e) {
             die($e->getMessage());
         }
