@@ -45,8 +45,8 @@ class CollectionCenterModel
     {
         try {
             //Consulta sql
-            $vSql = "SELECT m.* FROM material m" . 
-            "JOIN material_collection mc ON m.id_material = mc.id_material" .
+            $vSql = "SELECT m.* FROM material m " . 
+            "JOIN material_collection mc ON m.id_material = mc.id_material " .
             "WHERE mc.id_collection_center = $id";
 
             //Ejecutar la consulta

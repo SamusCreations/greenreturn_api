@@ -53,6 +53,29 @@ class collection_center
 
     }
 
+    public function getMaterialCollection($idCollection)
+    {
+        $material = new CollectionCenterModel();
+        $response = $material->getMaterialCollection($idCollection);
+        //Si hay respuesta
+        if (isset($response) && !empty($response)) {
+            //Armar el json
+            $json = array(
+                'status' => 200,
+                'results' => $response
+            );
+        } else {
+            $json = array(
+                'status' => 400,
+                'results' => "No hay registros"
+            );
+        }
+        echo json_encode(
+            $json,
+            http_response_code($json["status"])
+        );
+    }
+
     public function create()
     {
         $inputJSON = file_get_contents('php://input');
