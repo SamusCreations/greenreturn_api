@@ -76,12 +76,12 @@ class MaterialModel
 		try {
 			//Consulta sql
 			$vSql = "Update material SET name ='$objeto->name', description = '$objeto->description', image_url = '$objeto->image_url'," .
-			"measurement_unit = '$objeto->measurement_unit', unit_cost = '$objeto->unit_cost', id_color = '$objeto->id_color' Where id_material=$objeto->id";
+			"measurement_unit = '$objeto->measurement_unit', unit_cost = '$objeto->unit_cost', id_color = '$objeto->id_color' Where id_material=$objeto->id_material";
 
 			//Ejecutar la consulta
 			$vResultado = $this->enlace->executeSQL_DML($vSql);
 			// Retornar el objeto actualizado
-			return $this->get($objeto->id);
+			return $this->get($objeto->id_material);
 		} catch (Exception $e) {
 			die($e->getMessage());
 		}
