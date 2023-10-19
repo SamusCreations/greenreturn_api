@@ -25,6 +25,7 @@ require_once "models/UserModel.php";
 require_once "models/ColorModel.php";
 require_once "models/CategoryModel.php";
 require_once "models/RoleModel.php";
+require_once "models/CouponExchangeModel.php";
 
 
 /***--- Agregar todos los controladores*/
@@ -40,6 +41,7 @@ require_once "controllers/UserController.php";
 require_once "controllers/ColorController.php";
 require_once "controllers/CategoryController.php";
 require_once "controllers/RoleController.php";
+require_once "controllers/CouponExchangeController.php";
 
 
 //Enrutador
