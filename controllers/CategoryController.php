@@ -1,13 +1,13 @@
 <?php
-//class coupon
-class coupon
+//class Category
+class category
 {
     //Listar en el API
     public function index()
     {
         //Obtener el listado del Modelo
-        $coupon = new CouponModel();
-        $response = $coupon->all();
+        $Category = new CategoryModel();
+        $response = $Category->all();
         //Si hay respuesta
         if (isset($response) && !empty($response)) {
             //Armar el json
@@ -30,8 +30,8 @@ class coupon
     public function get($param)
     {
 
-        $coupon = new CouponModel();
-        $response = $coupon->get($param);
+        $Category = new CategoryModel();
+        $response = $Category->get($param);
         $json = array(
             'status' => 200,
             'results' => $response
@@ -44,7 +44,7 @@ class coupon
         } else {
             $json = array(
                 'status' => 400,
-                'results' => "No existe el coupon"
+                'results' => "No existe el Category"
             );
         }
         echo json_encode(
@@ -60,7 +60,7 @@ class coupon
     {
         $inputJSON = file_get_contents('php://input');
         $object = json_decode($inputJSON);
-        $material = new CouponModel();
+        $material = new CategoryModel();
         $response = $material->create($object);
         if (isset($response) && !empty($response)) {
             $json = array(
@@ -86,7 +86,7 @@ class coupon
     {
         $inputJSON = file_get_contents('php://input');
         $object = json_decode($inputJSON);
-        $material = new CouponModel();
+        $material = new CategoryModel();
         $response = $material->update($object);
         if (isset($response) && !empty($response)) {
             $json = array(

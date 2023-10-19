@@ -14,6 +14,7 @@ require_once "models/MySqlConnect.php";
 
 /***--- Agregar todos los modelos*/
 require_once "models/CantonModel.php";
+require_once "models/CategoryModel.php";
 require_once "models/CollectionCenterModel.php";
 require_once "models/CouponModel.php";
 require_once "models/DistrictModel.php";
@@ -26,6 +27,8 @@ require_once "models/UserModel.php";
 
 /***--- Agregar todos los controladores*/
 require_once "controllers/CantonController.php";
+
+require_once "controllers/CategoryController.php";
 require_once "controllers/CollectionCenterController.php";
 require_once "controllers/CouponController.php";
 require_once "controllers/DistrictController.php";
