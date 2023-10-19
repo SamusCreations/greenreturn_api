@@ -22,6 +22,9 @@ require_once "models/MaterialExchangeModel.php";
 require_once "models/MaterialModel.php";
 require_once "models/ProvinceModel.php";
 require_once "models/UserModel.php";
+require_once "models/ColorModel.php";
+require_once "models/CategoryModel.php";
+require_once "models/RoleModel.php";
 
 
 /***--- Agregar todos los controladores*/
@@ -34,6 +37,9 @@ require_once "controllers/MaterialExchangeController.php";
 require_once "controllers/MaterialController.php";
 require_once "controllers/ProvinceController.php";
 require_once "controllers/UserController.php";
+require_once "controllers/ColorController.php";
+require_once "controllers/CategoryController.php";
+require_once "controllers/RoleController.php";
 
 
 //Enrutador

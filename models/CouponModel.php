@@ -44,9 +44,20 @@ class CouponModel
         try {
             // Consulta SQL
             $vSql = "SELECT * FROM coupon WHERE id_coupon=$id";
+            $categoryModel = new CategoryModel();
 
             // Ejecutar la consulta
             $vResultado = $this->enlace->ExecuteSQL($vSql);
+            if (!empty($vResultado)) {
+                //Obtener objeto
+                $vResultado = $vResultado[0];
+
+                //---category
+                $category = $categoryModel->get($vResultado->id_category);
+                //Asignar category al objeto  
+                $vResultado->category = $category[0];
+
+            }
 
             // Retornar el resultado como un objeto Coupon
             return $vResultado;

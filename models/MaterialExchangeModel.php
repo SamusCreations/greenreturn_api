@@ -47,6 +47,22 @@ class MaterialExchangeModel
 
             // Ejecutar la consulta
             $vResultado = $this->enlace->ExecuteSQL($vSql);
+            if (!empty($vResultado)) {
+                //Obtener objeto
+                $vResultado = $vResultado[0];
+
+                //---ExchangeDetail 
+                //Consulta sql
+                $vSql = "SELECT ed.* FROM exchange_detail ed " .
+                    "JOIN material_exchange me ON ed.id_exchange = me.id_exchange " .
+                    "WHERE me.id_exchange = $id";
+
+                //Ejecutar la consulta
+                $listadoDetail = $this->enlace->ExecuteSQL($vSql);
+
+                //Asignar ExchangeDetail al objeto
+                $vResultado->details = $listadoDetail;
+            }
 
             // Retornar el resultado como un objeto MaterialExchange
             return $vResultado;
@@ -70,6 +86,16 @@ class MaterialExchangeModel
             // Ejecutar la consulta
             $vResultado = $this->enlace->executeSQL_DML_last($vSql);
 
+            //--- Detail ---
+            //Crear elementos a insertar en exchange_detail
+            $details = $objeto->details;
+
+            foreach ($details as $detail) {
+                $vSql = "INSERT INTO exchange_detail (id_exchange, id_material, quantity, unit_cost, subtotal) " .
+                    "VALUES ('$detail->id_exchange', '$detail->id_material', '$detail->quantity', '$detail->unit_cost', '$detail->subtotal')";
+                $this->enlace->executeSQL_DML($vSql);
+            }
+
             // Retornar el intercambio de materiales recién creado
             return $this->get($vResultado);
         } catch (Exception $e) {
@@ -91,6 +117,20 @@ class MaterialExchangeModel
 
             // Ejecutar la consulta
             $vResultado = $this->enlace->executeSQL_DML($vSql);
+
+            //--- exchange_detail ---
+            //Borrar detalles existentes asignados
+            $vSql = "Delete from exchange_detail Where id_exchange = $objeto->id_exchange";
+            $vResultado = $this->enlace->executeSQL_DML($vSql);
+
+            //Crear elementos a insertar en exchange_detail
+            $details = $objeto->details;
+
+            foreach ($details as $detail) {
+                $vSql = "INSERT INTO exchange_detail (id_exchange, id_material, quantity, unit_cost, subtotal) " .
+                    "VALUES ('$detail->id_exchange', '$detail->id_material', '$detail->quantity', '$detail->unit_cost', '$detail->subtotal')";
+                $this->enlace->executeSQL_DML($vSql);
+            }
 
             // Retornar el intercambio de materiales actualizado
             return $this->get($objeto->id_exchange);

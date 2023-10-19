@@ -1,13 +1,13 @@
 <?php
-//class MaterialExchange
-class material_exchange
+//class category
+class category
 {
     //Listar en el API
     public function index()
     {
         //Obtener el listado del Modelo
-        $MaterialExchange = new MaterialExchangeModel();
-        $response = $MaterialExchange->all();
+        $category = new CategoryModel();
+        $response = $category->all();
         //Si hay respuesta
         if (isset($response) && !empty($response)) {
             //Armar el json
@@ -30,8 +30,8 @@ class material_exchange
     public function get($param)
     {
 
-        $MaterialExchange = new MaterialExchangeModel();
-        $response = $MaterialExchange->get($param);
+        $category = new CategoryModel();
+        $response = $category->get($param);
         $json = array(
             'status' => 200,
             'results' => $response
@@ -44,7 +44,7 @@ class material_exchange
         } else {
             $json = array(
                 'status' => 400,
-                'results' => "No existe el MaterialExchange"
+                'results' => "No existe el category"
             );
         }
         echo json_encode(
@@ -60,13 +60,13 @@ class material_exchange
     {
         $inputJSON = file_get_contents('php://input');
         $object = json_decode($inputJSON);
-        $material = new MaterialExchangeModel();
-        $response = $material->create($object);
+        $category = new CategoryModel();
+        $response = $category->create($object);
         if (isset($response) && !empty($response)) {
             $json = array(
                 'status' => 200,
-/*                 'total' => count($response), */
-                'results' => $response
+                'total' => count($response),
+                'results' => $response[0]
             );
         } else {
             $json = array(
@@ -86,13 +86,13 @@ class material_exchange
     {
         $inputJSON = file_get_contents('php://input');
         $object = json_decode($inputJSON);
-        $material = new MaterialExchangeModel();
-        $response = $material->update($object);
+        $category = new CategoryModel();
+        $response = $category->update($object);
         if (isset($response) && !empty($response)) {
             $json = array(
                 'status' => 200,
-/*                 'total' => count($response), */
-                'results' => $response
+                'total' => count($response),
+                'results' => $response[0]
             );
         } else {
             $json = array(

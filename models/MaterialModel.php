@@ -29,31 +29,27 @@ class MaterialModel
 		try {
 			//Consulta sql
 			$vSql = "SELECT * FROM material where id_material=$id";
+			$colorModel = new ColorModel();
 
 			//Ejecutar la consulta
 			$vResultado = $this->enlace->ExecuteSQL($vSql);
+			if (!empty($vResultado)) {
+                //Obtener objeto
+                $vResultado = $vResultado[0];
+
+                //---color
+                $color = $colorModel->get($vResultado->id_color);
+                //Asignar color al objeto  
+                $vResultado->color = $color[0];
+
+            }
 			// Retornar el objeto
 			return $vResultado;
 		} catch (Exception $e) {
 			die($e->getMessage());
 		}
 	}
-	public function getMaterialColor($idMaterial)
-	{
-		try {
-			//Consulta sql
-			$vSql = "SELECT m.id_material, m.`name`, c.id_color, c.`name` as `color`  
-            FROM material m, color c
-            where m.id_color=c.id_color and m.id_material=$idMaterial";
-
-			//Ejecutar la consulta
-			$vResultado = $this->enlace->ExecuteSQL($vSql);
-			// Retornar el objeto
-			return $vResultado;
-		} catch (Exception $e) {
-			die($e->getMessage());
-		}
-	}
+	
 	public function create($objeto)
 	{
 		try {
