@@ -29,8 +29,7 @@ class MaterialModel
 		try {
 			//Consulta sql
 			$vSql = "SELECT * FROM material where id_material=$id";
-			$colorModel = new ColorModel();
-
+			
 			//Ejecutar la consulta
 			$vResultado = $this->enlace->ExecuteSQL($vSql);
 			if (!empty($vResultado)) {
@@ -38,6 +37,7 @@ class MaterialModel
                 $vResultado = $vResultado[0];
 
                 //---color
+				$colorModel = new ColorModel();
                 $color = $colorModel->get($vResultado->id_color);
                 //Asignar color al objeto  
                 $vResultado->color = $color[0];

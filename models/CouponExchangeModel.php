@@ -47,6 +47,23 @@ class CouponExchangeModel
 
             // Ejecutar la consulta
             $vResultado = $this->enlace->ExecuteSQL($vSql);
+            if (!empty($vResultado)) {
+                //Obtener objeto
+                $vResultado = $vResultado[0];
+
+                //---user
+                $userModel = new UserModel();
+                $user = $userModel->get($vResultado->id_user);
+                //Asignar user al objeto  
+                $vResultado->user = $user[0];
+
+                //---coupon
+                $couponModel = new couponModel();
+                $coupon = $couponModel->get($vResultado->id_coupon);
+                //Asignar coupon al objeto  
+                $vResultado->coupon = $coupon[0];
+
+            }
 
             // Retornar el resultado como un objeto Coupon
             return $vResultado;

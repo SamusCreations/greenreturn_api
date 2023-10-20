@@ -7,384 +7,6 @@
 	},
 	"item": [
 		{
-			"name": "Material",
-			"item": [
-				{
-					"name": "Listar Material",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/greenreturn_api/Material",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"greenreturn_api",
-								"Material"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Obtener Material",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/greenreturn_api/Material/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"greenreturn_api",
-								"Material",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Crear Material",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"\",\r\n    \"description\": \"\",\r\n    \"image_url\": \"\",\r\n    \"unit_cost\": \"\",\r\n    \"measurement_unit\": \"\",\r\n    \"id_color\": \"\"\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:81/greenreturn_api/Material",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"greenreturn_api",
-								"Material"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Actualizar Material",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id_material\": 0,\r\n    \"name\": \"\",\r\n    \"description\": \"\",\r\n    \"image_url\": \"\",\r\n    \"unit_cost\": 0,\r\n    \"measurement_unit\": \"\",\r\n    \"id_color\": 0\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:81/greenreturn_api/Material",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"greenreturn_api",
-								"Material"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Color de un Material",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/greenreturn_api/Material/getMaterialColor/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"greenreturn_api",
-								"Material",
-								"getMaterialColor",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "User",
-			"item": [
-				{
-					"name": "Listar User",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/greenreturn_api/User",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"greenreturn_api",
-								"User"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Obtener User",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/greenreturn_api/User/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"greenreturn_api",
-								"User",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Crear User",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"\",\r\n    \"password\": \"\",\r\n    \"id_role\": 0,\r\n    \"identification\": 0,\r\n    \"name\": \"\",\r\n    \"surname\": \"\",\r\n    \"telephone\": 0,\r\n    \"id_province\": 0,\r\n    \"id_canton\": 0,\r\n    \"id_district\": 0,\r\n    \"address\": \"\",\r\n    \"active\": 1\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:81/greenreturn_api/User",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"greenreturn_api",
-								"User"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Actualizar User",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id_user\": 0,\r\n    \"email\": \"\",\r\n    \"password\": \"\",\r\n    \"id_role\": 0,\r\n    \"identification\": 0,\r\n    \"name\": \"\",\r\n    \"surname\": \"\",\r\n    \"telephone\": 0,\r\n    \"id_province\": 0,\r\n    \"id_canton\": 0,\r\n    \"id_district\": 0,\r\n    \"address\": \"\",\r\n    \"active\": 1\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:81/greenreturn_api/User",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"greenreturn_api",
-								"User"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Users de un Role",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/greenreturn_api/User/getUserByRole/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"greenreturn_api",
-								"User",
-								"getUserByRole",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Collection Center",
-			"item": [
-				{
-					"name": "Listar Collection Center",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/greenreturn_api/Collection_Center",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"greenreturn_api",
-								"Collection_Center"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Obtener Collection Center",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/greenreturn_api/Collection_Center/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"greenreturn_api",
-								"Collection_Center",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Crear Collection Center",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"\",\r\n    \"id_province\": 0,\r\n    \"id_canton\": 0,\r\n    \"id_district\": 0,\r\n    \"address\": \"\",\r\n    \"telephone\": 0,\r\n    \"schedule\": \"\",\r\n    \"id_user\": 0,\r\n    \"active\": 1\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:81/greenreturn_api/Collection_Center",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"greenreturn_api",
-								"Collection_Center"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Actualizar Collection Center",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id_collection_center\": 0,\r\n    \"name\": \"\",\r\n    \"id_province\": 0,\r\n    \"id_canton\": 0,\r\n    \"id_district\": 0,\r\n    \"address\": \"\",\r\n    \"telephone\": 0,\r\n    \"schedule\": \"\",\r\n    \"id_user\": 0,\r\n    \"active\": 1\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:81/greenreturn_api/User",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"greenreturn_api",
-								"User"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Materials de un Collection Center",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/greenreturn_api/Collection_Center/getMaterialCollection/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"greenreturn_api",
-								"Collection_Center",
-								"getMaterialCollection",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "Province",
 			"item": [
 				{
@@ -697,6 +319,860 @@
 			]
 		},
 		{
+			"name": "Role",
+			"item": [
+				{
+					"name": "Listar Role",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/role",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"role"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Role",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/role/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"role",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Role",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/role",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"role"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Role",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_role\": 0,\r\n    \"name\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/role",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"role"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Listar User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/User",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"User"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/User/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"User",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"\",\r\n    \"password\": \"\",\r\n    \"id_role\": 0,\r\n    \"identification\": 0,\r\n    \"name\": \"\",\r\n    \"surname\": \"\",\r\n    \"telephone\": 0,\r\n    \"id_province\": 0,\r\n    \"id_canton\": 0,\r\n    \"id_district\": 0,\r\n    \"address\": \"\",\r\n    \"active\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/User",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"User"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_user\": 0,\r\n    \"email\": \"\",\r\n    \"password\": \"\",\r\n    \"id_role\": 0,\r\n    \"identification\": 0,\r\n    \"name\": \"\",\r\n    \"surname\": \"\",\r\n    \"telephone\": 0,\r\n    \"id_province\": 0,\r\n    \"id_canton\": 0,\r\n    \"id_district\": 0,\r\n    \"address\": \"\",\r\n    \"active\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/User",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"User"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users de un Role",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/User/getUserByRole/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"User",
+								"getUserByRole",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Color",
+			"item": [
+				{
+					"name": "Listar Color",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/color",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"color"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Color",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/color/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"color",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Color",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/color",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"color"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Color",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_color\": 0,\r\n    \"name\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/color",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"color"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Material",
+			"item": [
+				{
+					"name": "Listar Material",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/Material",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"Material"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Material",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/Material/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"Material",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Material",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"description\": \"\",\r\n    \"image_url\": \"\",\r\n    \"unit_cost\": \"\",\r\n    \"measurement_unit\": \"\",\r\n    \"id_color\": \"\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/Material",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"Material"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Material",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_material\": 0,\r\n    \"name\": \"\",\r\n    \"description\": \"\",\r\n    \"image_url\": \"\",\r\n    \"unit_cost\": 0,\r\n    \"measurement_unit\": \"\",\r\n    \"id_color\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/Material",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"Material"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Collection Center",
+			"item": [
+				{
+					"name": "Listar Collection Center",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/Collection_Center",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"Collection_Center"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Collection Center",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/Collection_Center/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"Collection_Center",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Collection Center",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Prueba\",\r\n    \"id_province\": 1,\r\n    \"id_canton\": 1,\r\n    \"id_district\": 1,\r\n    \"address\": \"Prueba\",\r\n    \"telephone\": 123456,\r\n    \"schedule\": \"Prueba\",\r\n    \"id_user\": 11,\r\n    \"active\": 1,\r\n    \"materials\": [\r\n        1,\r\n        6\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/Collection_Center",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"Collection_Center"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Collection Center",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_collection_center\": 11,\r\n    \"name\": \"AAA\",\r\n    \"id_province\": 1,\r\n    \"id_canton\": 1,\r\n    \"id_district\": 1,\r\n    \"address\": \"AAA\",\r\n    \"telephone\": 123,\r\n    \"schedule\": \"AAA\",\r\n    \"id_user\": 11,\r\n    \"active\": 1,\r\n    \"materials\": [\r\n        1,\r\n        6\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/Collection_Center",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"Collection_Center"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Material Exchange",
+			"item": [
+				{
+					"name": "Listar Material Exchange",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/material_exchange",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"material_exchange"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Material Exchange",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/material_exchange/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"material_exchange",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Material Exchange",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_user\": 0,\r\n    \"id_collection_center\": 0,\r\n    \"total\": 0,\r\n    \"details\": [\r\n        {\r\n            \"id_material\": 0,\r\n            \"quatity\": 0,\r\n            \"unit_cost\": 0,\r\n            \"subtotal\": 0\r\n        },\r\n        {\r\n            \"id_material\": 0,\r\n            \"quatity\": 0,\r\n            \"unit_cost\": 0,\r\n            \"subtotal\": 0\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/material_exchange",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"material_exchange"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Material Exchange",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_exchange\": 0,\r\n    \"id_user\": 0,\r\n    \"id_collection_center\": 0,\r\n    \"total\": 0,\r\n    \"details\": [\r\n        {\r\n            \"id_material\": 0,\r\n            \"quatity\": 0,\r\n            \"unit_cost\": 0,\r\n            \"subtotal\": 0\r\n        },\r\n        {\r\n            \"id_material\": 0,\r\n            \"quatity\": 0,\r\n            \"unit_cost\": 0,\r\n            \"subtotal\": 0\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/material_exchange",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"material_exchange"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Exchange Detail",
+			"item": [
+				{
+					"name": "Listar Exchange Detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/exchange_detail",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"exchange_detail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Exchange Detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/exchange_detail/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"exchange_detail",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Exchange Detail",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_exchange\": 0,\r\n    \"id_material\": 0,\r\n    \"quatity\": 0,\r\n    \"unit_cost\": 0,\r\n    \"subtotal\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/exchange_detail",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"exchange_detail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Exchange Detail",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_exchange\": 0,\r\n    \"id_material\": 0,\r\n    \"quatity\": 0,\r\n    \"unit_cost\": 0,\r\n    \"subtotal\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/exchange_detail",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"exchange_detail"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Listar Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/category/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_category\": 0,\r\n    \"name\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"category"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Coupon",
 			"item": [
 				{
@@ -793,6 +1269,110 @@
 							"path": [
 								"greenreturn_api",
 								"Coupon"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Coupon Exchange",
+			"item": [
+				{
+					"name": "Listar Coupon Exchange",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/coupon_exchange",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"coupon_exchange"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Coupon Exchange",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/coupon_exchange/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"coupon_exchange",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Coupon Exchange",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_coupon\": 0,\r\n    \"id_user\": 0,\r\n    \"qr_url\": \"\",\r\n    \"unit_cost\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/coupon_exchange",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"coupon_exchange"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Coupon Exchange",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_coupon\": 0,\r\n    \"id_user\": 0,\r\n    \"qr_url\": \"\",\r\n    \"unit_cost\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/coupon_exchange",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"coupon_exchange"
 							]
 						}
 					},
