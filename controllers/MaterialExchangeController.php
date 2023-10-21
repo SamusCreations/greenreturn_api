@@ -1,13 +1,13 @@
 <?php
-//class user
-class user
+//class MaterialExchange
+class material_exchange
 {
     //Listar en el API
     public function index()
     {
         //Obtener el listado del Modelo
-        $user = new UserModel();
-        $response = $user->all();
+        $MaterialExchange = new MaterialExchangeModel();
+        $response = $MaterialExchange->all();
         //Si hay respuesta
         if (isset($response) && !empty($response)) {
             //Armar el json
@@ -30,8 +30,8 @@ class user
     public function get($param)
     {
 
-        $user = new UserModel();
-        $response = $user->get($param);
+        $MaterialExchange = new MaterialExchangeModel();
+        $response = $MaterialExchange->get($param);
         $json = array(
             'status' => 200,
             'results' => $response
@@ -44,7 +44,7 @@ class user
         } else {
             $json = array(
                 'status' => 400,
-                'results' => "No existe el user"
+                'results' => "No existe el MaterialExchange"
             );
         }
         echo json_encode(
@@ -54,13 +54,16 @@ class user
 
     }
 
-    public function getUserByRole($id)
+    public function getCollectionCenterHistory($param)
     {
-        $user = new UserModel();
-        $response = $user->getUserByRole($id);
-        //Si hay respuesta
+
+        $MaterialExchange = new MaterialExchangeModel();
+        $response = $MaterialExchange->getCollectionCenterHistory($param);
+        $json = array(
+            'status' => 200,
+            'results' => $response
+        );
         if (isset($response) && !empty($response)) {
-            //Armar el json
             $json = array(
                 'status' => 200,
                 'results' => $response
@@ -68,26 +71,54 @@ class user
         } else {
             $json = array(
                 'status' => 400,
-                'results' => "No hay registros"
+                'results' => "No hay datos o no existe el Collection Center"
             );
         }
         echo json_encode(
             $json,
             http_response_code($json["status"])
         );
+
+    }
+
+    public function getUserHistory($param)
+    {
+
+        $MaterialExchange = new MaterialExchangeModel();
+        $response = $MaterialExchange->getUserHistory($param);
+        $json = array(
+            'status' => 200,
+            'results' => $response
+        );
+        if (isset($response) && !empty($response)) {
+            $json = array(
+                'status' => 200,
+                'results' => $response
+            );
+        } else {
+            $json = array(
+                'status' => 400,
+                'results' => "No hay datos o no existe el User"
+            );
+        }
+        echo json_encode(
+            $json,
+            http_response_code($json["status"])
+        );
+
     }
 
     public function create()
     {
         $inputJSON = file_get_contents('php://input');
         $object = json_decode($inputJSON);
-        $material = new UserModel();
+        $material = new MaterialExchangeModel();
         $response = $material->create($object);
         if (isset($response) && !empty($response)) {
             $json = array(
                 'status' => 200,
-                'total' => count($response),
-                'results' => $response[0]
+/*                 'total' => count($response), */
+                'results' => $response
             );
         } else {
             $json = array(
@@ -107,13 +138,13 @@ class user
     {
         $inputJSON = file_get_contents('php://input');
         $object = json_decode($inputJSON);
-        $material = new UserModel();
+        $material = new MaterialExchangeModel();
         $response = $material->update($object);
         if (isset($response) && !empty($response)) {
             $json = array(
                 'status' => 200,
-                'total' => count($response),
-                'results' => $response[0]
+/*                 'total' => count($response), */
+                'results' => $response
             );
         } else {
             $json = array(

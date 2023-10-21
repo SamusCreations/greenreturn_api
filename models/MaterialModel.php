@@ -29,31 +29,27 @@ class MaterialModel
 		try {
 			//Consulta sql
 			$vSql = "SELECT * FROM material where id_material=$id";
-
+			
 			//Ejecutar la consulta
 			$vResultado = $this->enlace->ExecuteSQL($vSql);
+			if (!empty($vResultado)) {
+                //Obtener objeto
+                $vResultado = $vResultado[0];
+
+                //---color
+				$colorModel = new ColorModel();
+                $color = $colorModel->get($vResultado->id_color);
+                //Asignar color al objeto  
+                $vResultado->color = $color[0];
+
+            }
 			// Retornar el objeto
 			return $vResultado;
 		} catch (Exception $e) {
 			die($e->getMessage());
 		}
 	}
-	public function getMaterialColor($idMaterial)
-	{
-		try {
-			//Consulta sql
-			$vSql = "SELECT m.id_material, m.`name`, c.id_color, c.`name` as `color`  
-            FROM material m, color c
-            where m.id_color=c.id_color and m.id_material=$idMaterial";
-
-			//Ejecutar la consulta
-			$vResultado = $this->enlace->ExecuteSQL($vSql);
-			// Retornar el objeto
-			return $vResultado;
-		} catch (Exception $e) {
-			die($e->getMessage());
-		}
-	}
+	
 	public function create($objeto)
 	{
 		try {
@@ -76,12 +72,12 @@ class MaterialModel
 		try {
 			//Consulta sql
 			$vSql = "Update material SET name ='$objeto->name', description = '$objeto->description', image_url = '$objeto->image_url'," .
-			"measurement_unit = '$objeto->measurement_unit', unit_cost = '$objeto->unit_cost', id_color = '$objeto->id_color' Where id_material=$objeto->id";
+			"measurement_unit = '$objeto->measurement_unit', unit_cost = '$objeto->unit_cost', id_color = '$objeto->id_color' Where id_material=$objeto->id_material";
 
 			//Ejecutar la consulta
 			$vResultado = $this->enlace->executeSQL_DML($vSql);
 			// Retornar el objeto actualizado
-			return $this->get($objeto->id);
+			return $this->get($objeto->id_material);
 		} catch (Exception $e) {
 			die($e->getMessage());
 		}

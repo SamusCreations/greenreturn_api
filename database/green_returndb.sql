@@ -326,16 +326,34 @@ ALTER TABLE `exchange_detail`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `province`
+--
+ALTER TABLE `province`
+  MODIFY `id_province` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  
+  --
+-- AUTO_INCREMENT de la tabla `canton`
+--
+ALTER TABLE `canton`
+  MODIFY `id_canton` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  
+  --
+-- AUTO_INCREMENT de la tabla `district`
+--
+ALTER TABLE `district`
+  MODIFY `id_district` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
 -- AUTO_INCREMENT de la tabla `material_exchange`
 --
 ALTER TABLE `material_exchange`
-  MODIFY `id_exchange` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_exchange` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `collection_center`
 --
 ALTER TABLE `collection_center`
-  MODIFY `id_collection_center` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_collection_center` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -347,7 +365,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
   
 --
 -- AUTO_INCREMENT de la tabla `material`
@@ -365,7 +383,7 @@ ALTER TABLE `color`
 -- AUTO_INCREMENT de la tabla `material`
 --
 ALTER TABLE `coupon`
-  MODIFY `id_coupon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_coupon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
   
 --
 -- AUTO_INCREMENT de la tabla `category`

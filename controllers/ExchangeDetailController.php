@@ -1,13 +1,13 @@
 <?php
-//class user
-class user
+//class ExchangeDetail
+class exchange_detail
 {
     //Listar en el API
     public function index()
     {
         //Obtener el listado del Modelo
-        $user = new UserModel();
-        $response = $user->all();
+        $ExchangeDetail = new ExchangeDetailModel();
+        $response = $ExchangeDetail->all();
         //Si hay respuesta
         if (isset($response) && !empty($response)) {
             //Armar el json
@@ -30,8 +30,8 @@ class user
     public function get($param)
     {
 
-        $user = new UserModel();
-        $response = $user->get($param);
+        $ExchangeDetail = new ExchangeDetailModel();
+        $response = $ExchangeDetail->get($param);
         $json = array(
             'status' => 200,
             'results' => $response
@@ -44,7 +44,7 @@ class user
         } else {
             $json = array(
                 'status' => 400,
-                'results' => "No existe el user"
+                'results' => "No existe el ExchangeDetail"
             );
         }
         echo json_encode(
@@ -54,34 +54,13 @@ class user
 
     }
 
-    public function getUserByRole($id)
-    {
-        $user = new UserModel();
-        $response = $user->getUserByRole($id);
-        //Si hay respuesta
-        if (isset($response) && !empty($response)) {
-            //Armar el json
-            $json = array(
-                'status' => 200,
-                'results' => $response
-            );
-        } else {
-            $json = array(
-                'status' => 400,
-                'results' => "No hay registros"
-            );
-        }
-        echo json_encode(
-            $json,
-            http_response_code($json["status"])
-        );
-    }
+    
 
     public function create()
     {
         $inputJSON = file_get_contents('php://input');
         $object = json_decode($inputJSON);
-        $material = new UserModel();
+        $material = new ExchangeDetailModel();
         $response = $material->create($object);
         if (isset($response) && !empty($response)) {
             $json = array(
@@ -107,7 +86,7 @@ class user
     {
         $inputJSON = file_get_contents('php://input');
         $object = json_decode($inputJSON);
-        $material = new UserModel();
+        $material = new ExchangeDetailModel();
         $response = $material->update($object);
         if (isset($response) && !empty($response)) {
             $json = array(

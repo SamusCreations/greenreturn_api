@@ -1,13 +1,13 @@
 <?php
-//class user
-class user
+//class CouponExchange
+class coupon_exchange 
 {
     //Listar en el API
     public function index()
     {
         //Obtener el listado del Modelo
-        $user = new UserModel();
-        $response = $user->all();
+        $CouponExchange = new CouponExchangeModel();
+        $response = $CouponExchange->all();
         //Si hay respuesta
         if (isset($response) && !empty($response)) {
             //Armar el json
@@ -30,8 +30,8 @@ class user
     public function get($param)
     {
 
-        $user = new UserModel();
-        $response = $user->get($param);
+        $CouponExchange = new CouponExchangeModel();
+        $response = $CouponExchange->get($param);
         $json = array(
             'status' => 200,
             'results' => $response
@@ -44,7 +44,7 @@ class user
         } else {
             $json = array(
                 'status' => 400,
-                'results' => "No existe el user"
+                'results' => "No existe el Coupon Exchange"
             );
         }
         echo json_encode(
@@ -54,13 +54,16 @@ class user
 
     }
 
-    public function getUserByRole($id)
+    public function getUserHistory($param)
     {
-        $user = new UserModel();
-        $response = $user->getUserByRole($id);
-        //Si hay respuesta
+
+        $CouponExchange = new CouponExchangeModel();
+        $response = $CouponExchange->getUserHistory($param);
+        $json = array(
+            'status' => 200,
+            'results' => $response
+        );
         if (isset($response) && !empty($response)) {
-            //Armar el json
             $json = array(
                 'status' => 200,
                 'results' => $response
@@ -68,20 +71,21 @@ class user
         } else {
             $json = array(
                 'status' => 400,
-                'results' => "No hay registros"
+                'results' => "No hay datos o no existe el Coupon Exchange"
             );
         }
         echo json_encode(
             $json,
             http_response_code($json["status"])
         );
+
     }
 
     public function create()
     {
         $inputJSON = file_get_contents('php://input');
         $object = json_decode($inputJSON);
-        $material = new UserModel();
+        $material = new CouponExchangeModel();
         $response = $material->create($object);
         if (isset($response) && !empty($response)) {
             $json = array(
@@ -107,7 +111,7 @@ class user
     {
         $inputJSON = file_get_contents('php://input');
         $object = json_decode($inputJSON);
-        $material = new UserModel();
+        $material = new CouponExchangeModel();
         $response = $material->update($object);
         if (isset($response) && !empty($response)) {
             $json = array(
