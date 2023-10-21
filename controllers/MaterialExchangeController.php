@@ -54,7 +54,59 @@ class material_exchange
 
     }
 
-    
+    public function getCollectionCenterHistory($param)
+    {
+
+        $MaterialExchange = new MaterialExchangeModel();
+        $response = $MaterialExchange->getCollectionCenterHistory($param);
+        $json = array(
+            'status' => 200,
+            'results' => $response
+        );
+        if (isset($response) && !empty($response)) {
+            $json = array(
+                'status' => 200,
+                'results' => $response
+            );
+        } else {
+            $json = array(
+                'status' => 400,
+                'results' => "No hay datos o no existe el Collection Center"
+            );
+        }
+        echo json_encode(
+            $json,
+            http_response_code($json["status"])
+        );
+
+    }
+
+    public function getUserHistory($param)
+    {
+
+        $MaterialExchange = new MaterialExchangeModel();
+        $response = $MaterialExchange->getUserHistory($param);
+        $json = array(
+            'status' => 200,
+            'results' => $response
+        );
+        if (isset($response) && !empty($response)) {
+            $json = array(
+                'status' => 200,
+                'results' => $response
+            );
+        } else {
+            $json = array(
+                'status' => 400,
+                'results' => "No hay datos o no existe el User"
+            );
+        }
+        echo json_encode(
+            $json,
+            http_response_code($json["status"])
+        );
+
+    }
 
     public function create()
     {

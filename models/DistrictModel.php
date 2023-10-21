@@ -65,7 +65,7 @@ class DistrictModel
     {
         try {
             // Consulta SQL
-            $vSql = "INSERT INTO district (id_province, id_canton, id_district, name) VALUES ('$objeto->id_province', '$objeto->id_canton', '$objeto->id_district', '$objeto->name')";
+            $vSql = "INSERT INTO district (id_province, id_canton, name) VALUES ('$objeto->id_province', '$objeto->id_canton', '$objeto->name')";
 
             // Ejecutar la consulta
             $vResultado = $this->enlace->executeSQL_DML_last($vSql);

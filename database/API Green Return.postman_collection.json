@@ -961,6 +961,50 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Historial Collection Center",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/material_exchange/getCollectionCenterHistory/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"material_exchange",
+								"getCollectionCenterHistory",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Historial User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/material_exchange/getUserHistory/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"material_exchange",
+								"getUserHistory",
+								"11"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -1373,6 +1417,28 @@
 							"path": [
 								"greenreturn_api",
 								"coupon_exchange"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Historial User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/coupon_exchange/getUserHistory/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"coupon_exchange",
+								"getUserHistory",
+								"1"
 							]
 						}
 					},

@@ -65,7 +65,7 @@ class ProvinceModel
     {
         try {
             // Consulta SQL
-            $vSql = "INSERT INTO province (id_province, name) VALUES ('$objeto->id_province', '$objeto->name')";
+            $vSql = "INSERT INTO province (name) VALUES ('$objeto->name')";
 
             // Ejecutar la consulta
             $vResultado = $this->enlace->executeSQL_DML_last($vSql);

@@ -72,6 +72,55 @@ class MaterialExchangeModel
     }
 
     /**
+     * Obtiene el historial de intercambios de un centro de acopio por su ID.
+     *
+     * @param int $id El ID del centro de acopio a buscar.
+     * @return object|false Retorna un array de objetos MaterialExchange o false en caso de error o si no se encuentra el centro de acopio.
+     */
+    public function getCollectionCenterHistory($id)
+    {
+        try {
+            // Consulta SQL
+            $vSql = "SELECT me.* FROM material_exchange me 
+         JOIN collection_center cc ON me.id_collection_center = cc.id_collection_center
+         WHERE cc.id_collection_center = $id ORDER BY me.date_created;";
+
+
+            // Ejecutar la consulta
+            $vResultado = $this->enlace->ExecuteSQL($vSql);
+
+            // Retornar el resultado como un array de objetos MaterialExchange
+            return $vResultado;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    /**
+     * Obtiene el historial de intercambios de un usuario por su ID.
+     *
+     * @param int $id El ID del usuario a buscar.
+     * @return object|false Retorna un array de objetos MaterialExchange o false en caso de error o si no se encuentra el usuario.
+     */
+    public function getUserHistory($id)
+    {
+        try {
+            // Consulta SQL
+            $vSql = "SELECT me.*  FROM material_exchange me 
+            JOIN user u ON me.id_user = u.id_user
+            WHERE u.id_user = $id ORDER BY me.date_created;";
+
+            // Ejecutar la consulta
+            $vResultado = $this->enlace->ExecuteSQL($vSql);
+
+            // Retornar el resultado como un array de objetos MaterialExchange
+            return $vResultado;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    /**
      * Crea un nuevo intercambio de materiales en la base de datos.
      *
      * @param object $objeto Un objeto MaterialExchange con los datos del nuevo intercambio.

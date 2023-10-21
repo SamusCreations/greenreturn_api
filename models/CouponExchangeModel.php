@@ -72,6 +72,30 @@ class CouponExchangeModel
         }
     }
 
+     /**
+     * Obtiene el historial de intercambios de un usuario por su ID.
+     *
+     * @param int $id El ID del usuario a buscar.
+     * @return object|false Retorna un array de objetos Coupon Exchange o false en caso de error o si no se encuentra el usuario.
+     */
+    public function getUserHistory($id)
+    {
+        try {
+            // Consulta SQL
+            $vSql = "SELECT ce.*  FROM coupon_exchange ce 
+            JOIN user u ON ce.id_user = u.id_user
+            WHERE u.id_user = $id ORDER BY ce.date_created;";
+
+            // Ejecutar la consulta
+            $vResultado = $this->enlace->ExecuteSQL($vSql);
+
+            // Retornar el resultado como un array de objetos Coupon Exchange
+            return $vResultado;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
     /**
      * Crea un nuevo cupón en la base de datos.
      *

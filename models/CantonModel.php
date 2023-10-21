@@ -65,7 +65,7 @@ class CantonModel
     {
         try {
             // Consulta SQL
-            $vSql = "INSERT INTO canton (id_province, id_canton, name) VALUES ('$objeto->id_province', '$objeto->id_canton', '$objeto->name')";
+            $vSql = "INSERT INTO canton (id_province, name) VALUES ('$objeto->id_province', '$objeto->name')";
 
             // Ejecutar la consulta
             $vResultado = $this->enlace->executeSQL_DML_last($vSql);
