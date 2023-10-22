@@ -123,7 +123,7 @@ CREATE TABLE `material` (
   `name` varchar(100) NOT NULL,
   `description` varchar(100),
   `image_url` varchar(100),
-  `measurement_unit` varchar(10),
+  `id_measurement` int(11) NOT NULL,
   `unit_cost` int,
   `id_color` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -136,7 +136,20 @@ CREATE TABLE `material` (
 
 CREATE TABLE `color` (
   `id_color` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL
+  `name` varchar(100) NOT NULL,
+  `value` varchar(10) NOT NULL 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `color`
+--
+
+CREATE TABLE `measurement` (
+  `id_measurement` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `value` varchar(10) NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -264,6 +277,13 @@ ALTER TABLE `color`
   ADD PRIMARY KEY (`id_color`),
   ADD INDEX `idx_color`(`id_color`);
   
+  --
+-- Indices de la tabla `measurement`
+--
+ALTER TABLE `measurement`
+  ADD PRIMARY KEY (`id_measurement`),
+  ADD INDEX `idx_measurement`(`id_measurement`);
+  
 --
 -- Indices de la tabla `material_collection`
 --
@@ -379,6 +399,12 @@ ALTER TABLE `material`
 ALTER TABLE `color`
   MODIFY `id_color` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
   
+  --
+-- AUTO_INCREMENT de la tabla `measurement`
+--
+ALTER TABLE `measurement`
+  MODIFY `id_measurement` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  
 --
 -- AUTO_INCREMENT de la tabla `material`
 --
@@ -432,7 +458,8 @@ ALTER TABLE `material_collection`
 -- Filtros para la tabla `material`
 --
 ALTER TABLE `material`
-  ADD CONSTRAINT `fk_material_color` FOREIGN KEY (`id_color`) REFERENCES `color` (`id_color`);
+  ADD CONSTRAINT `fk_material_color` FOREIGN KEY (`id_color`) REFERENCES `color` (`id_color`),
+  ADD CONSTRAINT `fk_material_measurement` FOREIGN KEY (`id_measurement`) REFERENCES `measurement` (`id_measurement`);
   
 --
 -- Filtros para la tabla `material_exchange`

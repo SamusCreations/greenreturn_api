@@ -29,35 +29,41 @@ class MaterialModel
 		try {
 			//Consulta sql
 			$vSql = "SELECT * FROM material where id_material=$id";
-			
+
 			//Ejecutar la consulta
 			$vResultado = $this->enlace->ExecuteSQL($vSql);
 			if (!empty($vResultado)) {
-                //Obtener objeto
-                $vResultado = $vResultado[0];
+				//Obtener objeto
+				$vResultado = $vResultado[0];
 
-                //---color
+				//---color
 				$colorModel = new ColorModel();
-                $color = $colorModel->get($vResultado->id_color);
-                //Asignar color al objeto  
-                $vResultado->color = $color[0];
+				$color = $colorModel->get($vResultado->id_color);
+				//Asignar color al objeto  
+				$vResultado->color = $color[0];
 
-            }
+				//---measurement
+				$measurementModel = new measurementModel();
+				$measurement = $measurementModel->get($vResultado->id_measurement);
+				//Asignar measurement al objeto  
+				$vResultado->measurement = $measurement[0];
+
+			}
 			// Retornar el objeto
 			return $vResultado;
 		} catch (Exception $e) {
 			die($e->getMessage());
 		}
 	}
-	
+
 	public function create($objeto)
 	{
 		try {
 			//Consulta sql
 			//Identificador autoincrementable
 
-			$vSql = "Insert into material (name, description, image_url, measurement_unit, unit_cost, id_color)" .
-				"Values ('$objeto->name', '$objeto->description', '$objeto->image_url', '$objeto->measurement_unit', '$objeto->unit_cost', '$objeto->id_color')";
+			$vSql = "Insert into material (name, description, image_url, id_measurement, unit_cost, id_color)" .
+				"Values ('$objeto->name', '$objeto->description', '$objeto->image_url', '$objeto->id_measurement', '$objeto->unit_cost', '$objeto->id_color')";
 
 			//Ejecutar la consulta
 			$vResultado = $this->enlace->executeSQL_DML_last($vSql);
@@ -72,7 +78,7 @@ class MaterialModel
 		try {
 			//Consulta sql
 			$vSql = "Update material SET name ='$objeto->name', description = '$objeto->description', image_url = '$objeto->image_url'," .
-			"measurement_unit = '$objeto->measurement_unit', unit_cost = '$objeto->unit_cost', id_color = '$objeto->id_color' Where id_material=$objeto->id_material";
+				"id_measurement = '$objeto->id_measurement', unit_cost = '$objeto->unit_cost', id_color = '$objeto->id_color' Where id_material=$objeto->id_material";
 
 			//Ejecutar la consulta
 			$vResultado = $this->enlace->executeSQL_DML($vSql);
