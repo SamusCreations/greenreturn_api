@@ -599,7 +599,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"\"\r\n}",
+							"raw": "{\r\n    \"name\": \"white\",\r\n    \"value\": \"#FFFF\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -645,6 +645,110 @@
 							"path": [
 								"greenreturn_api",
 								"color"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Measurement",
+			"item": [
+				{
+					"name": "Listar Measurement",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/Measurement",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"Measurement"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Measurement",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/Measurement/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"Measurement",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Measurement",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Kilograms\",\r\n    \"value\": \"Kg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/Measurement",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"Measurement"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Measurement",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_measurement\": 1,\r\n    \"name\": \"Kilogram\",\r\n    \"value\": \"kg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/greenreturn_api/Measurement",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"greenreturn_api",
+								"Measurement"
 							]
 						}
 					},
@@ -703,7 +807,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"\",\r\n    \"description\": \"\",\r\n    \"image_url\": \"\",\r\n    \"unit_cost\": \"\",\r\n    \"measurement_unit\": \"\",\r\n    \"id_color\": \"\"\r\n}\r\n",
+							"raw": "{\r\n    \"name\": \"Paper\",\r\n    \"description\": \"Recycled paper\",\r\n    \"image_url\": \"url\",\r\n    \"unit_cost\": 1,\r\n    \"id_measurement\": 1,\r\n    \"id_color\": 1\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"

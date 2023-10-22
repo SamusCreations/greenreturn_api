@@ -1,13 +1,13 @@
 <?php
-//class material
-class material
+//class measurement
+class measurement
 {
     //Listar en el API
     public function index()
     {
         //Obtener el listado del Modelo
-        $material = new MaterialModel();
-        $response = $material->all();
+        $measurement = new measurementModel();
+        $response = $measurement->all();
         //Si hay respuesta
         if (isset($response) && !empty($response)) {
             //Armar el json
@@ -26,15 +26,27 @@ class material
             http_response_code($json["status"])
         );
     }
+
     public function get($param)
     {
 
-        $material = new MaterialModel();
-        $response = $material->get($param);
+        $measurement = new measurementModel();
+        $response = $measurement->get($param);
         $json = array(
             'status' => 200,
             'results' => $response
         );
+        if (isset($response) && !empty($response)) {
+            $json = array(
+                'status' => 200,
+                'results' => $response
+            );
+        } else {
+            $json = array(
+                'status' => 400,
+                'results' => "No existe el measurement"
+            );
+        }
         echo json_encode(
             $json,
             http_response_code($json["status"])
@@ -42,16 +54,18 @@ class material
 
     }
 
+    
+
     public function create()
     {
         $inputJSON = file_get_contents('php://input');
         $object = json_decode($inputJSON);
-        $material = new MaterialModel();
-        $response = $material->create($object);
+        $measurement = new measurementModel();
+        $response = $measurement->create($object);
         if (isset($response) && !empty($response)) {
             $json = array(
                 'status' => 200,
-/*                 'total' => count($response), */
+                'total' => count($response),
                 'results' => $response[0]
             );
         } else {
@@ -72,12 +86,12 @@ class material
     {
         $inputJSON = file_get_contents('php://input');
         $object = json_decode($inputJSON);
-        $material = new MaterialModel();
-        $response = $material->update($object);
+        $measurement = new measurementModel();
+        $response = $measurement->update($object);
         if (isset($response) && !empty($response)) {
             $json = array(
                 'status' => 200,
-/*                 'total' => count($response), */
+                'total' => count($response),
                 'results' => $response[0]
             );
         } else {
