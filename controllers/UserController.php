@@ -86,8 +86,7 @@ class user
         if (isset($response) && !empty($response)) {
             $json = array(
                 'status' => 200,
-                'total' => count($response),
-                'results' => $response[0]
+                'results' => $response
             );
         } else {
             $json = array(
@@ -112,8 +111,7 @@ class user
         if (isset($response) && !empty($response)) {
             $json = array(
                 'status' => 200,
-                'total' => count($response),
-                'results' => $response[0]
+                'results' => $response
             );
         } else {
             $json = array(
