@@ -55,6 +55,8 @@ class ColorModel
         }
     }
 
+    
+
     /**
      * Crea un nuevo color en la base de datos.
      *

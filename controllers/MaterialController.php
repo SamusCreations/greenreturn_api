@@ -42,6 +42,22 @@ class material
 
     }
 
+    public function getColorByMaterialId($param)
+    {
+
+        $material = new MaterialModel();
+        $response = $material->getColorByMaterialId($param);
+        $json = array(
+            'status' => 200,
+            'results' => $response
+        );
+        echo json_encode(
+            $json,
+            http_response_code($json["status"])
+        );
+
+    }
+
     public function create()
     {
         $inputJSON = file_get_contents('php://input');

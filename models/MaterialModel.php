@@ -12,7 +12,9 @@ class MaterialModel
 	{
 		try {
 			//Consulta sql
-			$vSql = "SELECT * FROM material;";
+			$vSql = "SELECT m.*, c.name AS color_name, c.value AS color_value
+			FROM material m
+			INNER JOIN color c ON m.id_color = c.id_color";
 
 			//Ejecutar la consulta
 			$vResultado = $this->enlace->ExecuteSQL($vSql);
@@ -55,6 +57,34 @@ class MaterialModel
 			die($e->getMessage());
 		}
 	}
+
+	public function getColorByMaterialId($materialID)
+{
+    try {
+        // Consulta SQL para obtener el color asociado al material
+        $sql = "SELECT c.* 
+                FROM color c
+                INNER JOIN material m ON c.id_color = m.id_color
+                WHERE m.id_material = $materialID";
+
+        // Ejecutar la consulta
+        $result = $this->enlace->ExecuteSQL($sql);
+
+        // Comprobar si se encontró un resultado
+        if ($result) {
+            // Retornar el resultado como un objeto Color
+            return $result;
+        } else {
+            // En caso de no encontrar un resultado, puedes devolver un valor nulo o lanzar una excepción según tus necesidades.
+            return null;
+        }
+    } catch (Exception $e) {
+        die($e->getMessage());
+    }
+}
+
+
+
 
 	public function create($objeto)
 	{
