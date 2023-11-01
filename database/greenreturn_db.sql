@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2023 at 03:16 AM
+-- Generation Time: Oct 31, 2023 at 11:47 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -54,6 +54,15 @@ CREATE TABLE `category` (
   `id_category` int(11) NOT NULL,
   `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id_category`, `name`) VALUES
+(1, 'Entertainment'),
+(2, 'Healthy Dining'),
+(3, 'Eco-Friendly Products');
 
 -- --------------------------------------------------------
 
@@ -121,6 +130,15 @@ CREATE TABLE `coupon` (
   `end_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `coupon`
+--
+
+INSERT INTO `coupon` (`id_coupon`, `name`, `description`, `image_url`, `id_category`, `unit_cost`, `start_date`, `end_date`) VALUES
+(1, 'Movie Night Out', 'Enjoy a movie night with a loved one. Get two tickets for the price of one!', '../../assets/error.png', 1, 50, '2023-11-15 06:00:00', '2023-12-31 06:00:00'),
+(2, 'Adventure Park Pass', 'Experience an adventurous day at our local adventure park. Half-price entry for a thrilling time!', '../../assets/error.png', 1, 40, '2023-11-01 06:00:00', '2023-12-15 06:00:00'),
+(3, 'Live Music Concert', 'Rock out at a live music concert! Redeem this coupon for a discounted ticket to the hottest show in ', '../../assets/error.png', 1, 60, '2023-11-10 06:00:00', '2023-11-30 06:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -134,6 +152,15 @@ CREATE TABLE `coupon_exchange` (
   `unit_cost` int(11) DEFAULT NULL,
   `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `coupon_exchange`
+--
+
+INSERT INTO `coupon_exchange` (`id_coupon`, `id_user`, `qr_url`, `unit_cost`, `date_created`) VALUES
+(1, 5, 'qr', 50, '2023-10-31 22:39:04'),
+(2, 5, 'qr', 40, '2023-10-31 22:43:56'),
+(3, 5, 'qr', 60, '2023-10-31 22:45:03');
 
 -- --------------------------------------------------------
 
@@ -170,6 +197,24 @@ CREATE TABLE `exchange_detail` (
   `unit_cost` int(11) DEFAULT NULL,
   `subtotal` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `exchange_detail`
+--
+
+INSERT INTO `exchange_detail` (`id_exchange`, `id_material`, `quantity`, `unit_cost`, `subtotal`) VALUES
+(1, 1, 10, 1, 10),
+(1, 2, 5, 2, 10),
+(2, 1, 15, 1, 15),
+(2, 2, 10, 2, 20),
+(3, 1, 5, 1, 5),
+(3, 2, 5, 2, 10),
+(4, 1, 5, 1, 5),
+(4, 3, 5, 5, 25),
+(5, 1, 10, 1, 10),
+(5, 2, 5, 2, 10),
+(6, 2, 5, 2, 10),
+(6, 3, 10, 5, 50);
 
 -- --------------------------------------------------------
 
@@ -232,6 +277,18 @@ CREATE TABLE `material_exchange` (
   `total` int(11) DEFAULT NULL,
   `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `material_exchange`
+--
+
+INSERT INTO `material_exchange` (`id_exchange`, `id_user`, `id_collection_center`, `total`, `date_created`) VALUES
+(1, 2, 1, 20, '2023-10-31 21:28:43'),
+(2, 2, 1, 35, '2023-10-31 22:06:08'),
+(3, 2, 1, 15, '2023-10-31 22:07:18'),
+(4, 5, 2, 30, '2023-10-31 22:15:00'),
+(5, 5, 1, 20, '2023-10-31 22:15:27'),
+(6, 5, 3, 60, '2023-10-31 22:16:34');
 
 -- --------------------------------------------------------
 
@@ -325,7 +382,8 @@ INSERT INTO `user` (`id_user`, `email`, `password`, `id_role`, `identification`,
 (1, 'Samirr022004@gmail.com', '123456', 1, 208500499, 'Samuel', 'Romero Ramirez', 83211179, 1, 1, 1, 'San Juan, Calle Bambú 200mts sur', 0, 0x31),
 (2, 'Dapp0204@gmail.com', '654321', 2, 208490543, 'Carlos', 'Ruiz Vargas', 84695321, 2, 2, 2, 'Calle Almendros 400mts noroeste', 0, 0x31),
 (3, 'Luis2000@gmail.com', '123456', 2, 208470295, 'Luis', 'Rodriguez Lopez', 65789658, 3, 3, 3, 'Calle Rosas 100mts este', 0, 0x31),
-(4, 'Sof0345@gmail.com', '654321', 2, 208480789, 'Sofia', 'Valverde Gomez', 87463215, 3, 3, 3, 'Calle Canto 225mts oeste', 0, 0x31);
+(4, 'Sof0345@gmail.com', '654321', 2, 208480789, 'Sofia', 'Valverde Gomez', 87463215, 3, 3, 3, 'Calle Canto 225mts oeste', 0, 0x31),
+(5, 'Laura123@gmail.com', '123456', 3, 207900487, 'Laura', 'Zamora Solorzano', 69854732, 1, 1, 1, 'Calle Verde', 0, 0x31);
 
 --
 -- Indexes for dumped tables
@@ -465,7 +523,7 @@ ALTER TABLE `canton`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `collection_center`
@@ -483,7 +541,7 @@ ALTER TABLE `color`
 -- AUTO_INCREMENT for table `coupon`
 --
 ALTER TABLE `coupon`
-  MODIFY `id_coupon` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_coupon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `district`
@@ -501,7 +559,7 @@ ALTER TABLE `material`
 -- AUTO_INCREMENT for table `material_exchange`
 --
 ALTER TABLE `material_exchange`
-  MODIFY `id_exchange` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_exchange` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `measurement`
@@ -525,7 +583,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

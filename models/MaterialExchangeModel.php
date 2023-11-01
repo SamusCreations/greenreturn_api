@@ -177,7 +177,7 @@ class MaterialExchangeModel
 
             foreach ($details as $detail) {
                 $vSql = "INSERT INTO exchange_detail (id_exchange, id_material, quantity, unit_cost, subtotal) " .
-                    "VALUES ('$detail->id_exchange', '$detail->id_material', '$detail->quantity', '$detail->unit_cost', '$detail->subtotal')";
+                    "VALUES ('$objeto->id_exchange', '$detail->id_material', '$detail->quantity', '$detail->unit_cost', '$detail->subtotal')";
                 $this->enlace->executeSQL_DML($vSql);
             }
 
