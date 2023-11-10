@@ -40,7 +40,7 @@ class CollectionCenterModel
                 $userModel = new UserModel();
                 $adminCC = $userModel->get($vResultado->id_user);
                 //Asignar adminCC al objeto  
-                $vResultado->cc_administrator = $adminCC;
+                $vResultado->administrator = $adminCC;
 
                 //---materiales 
                 //Consulta sql

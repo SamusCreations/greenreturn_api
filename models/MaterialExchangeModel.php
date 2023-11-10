@@ -120,9 +120,12 @@ class MaterialExchangeModel
     {
         try {
             // Consulta SQL
-            $vSql = "SELECT me.*  FROM material_exchange me 
+            $vSql = "SELECT me.*, cc.name as cc_name
+            FROM material_exchange me
             JOIN user u ON me.id_user = u.id_user
-            WHERE u.id_user = $id ORDER BY me.date_created;";
+            JOIN collection_center cc ON me.id_collection_center = cc.id_collection_center
+            WHERE u.id_user = $id
+            ORDER BY me.date_created;";
 
             // Ejecutar la consulta
             $vResultado = $this->enlace->ExecuteSQL($vSql);

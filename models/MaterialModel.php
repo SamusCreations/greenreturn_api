@@ -12,9 +12,10 @@ class MaterialModel
 	{
 		try {
 			//Consulta sql
-			$vSql = "SELECT m.*, c.name AS color_name, c.value AS color_value
+			$vSql = "SELECT m.*, c.name AS color_name, c.value AS color_value, me.name AS measurement_name, me.value AS measurement_value
 			FROM material m
-			INNER JOIN color c ON m.id_color = c.id_color";
+			INNER JOIN color c ON m.id_color = c.id_color
+			INNER JOIN measurement me ON m.id_measurement = me.id_measurement";
 
 			//Ejecutar la consulta
 			$vResultado = $this->enlace->ExecuteSQL($vSql);
