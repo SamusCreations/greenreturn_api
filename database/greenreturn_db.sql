@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2023 at 11:47 PM
+-- Generation Time: Nov 13, 2023 at 05:11 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -88,9 +88,9 @@ CREATE TABLE `collection_center` (
 --
 
 INSERT INTO `collection_center` (`id_collection_center`, `name`, `id_province`, `id_canton`, `id_district`, `address`, `telephone`, `schedule`, `id_user`, `active`) VALUES
-(1, 'EcoHub Collection Center', 1, 1, 1, 'Green Street, San Jose, Costa Rica', 24501968, 'Monday to Friday: 8:00 AM - 6:00 PM Saturday: 9:00 AM - 4:00 PM', 2, 0x31),
-(2, 'Green Recycling Depot', 2, 2, 2, 'Eco Road, Alajuela, Costa Rica', 45637896, 'Monday to Saturday: 7:30 AM - 5:00 PM', 3, 0x31),
-(3, 'RenewCycle Collection Point', 3, 3, 3, 'Sustainable Drive, Cartago, Costa Rica', 86547832, 'Monday to Friday: 8:30 AM - 5:30 PM', 4, 0x31);
+(1, 'EcoHub Collection Center', 1, 1, 1, 'Green Street', 24501968, 'Monday to Friday: 8:00 AM - 6:00 PM Saturday: 9:00 AM - 4:00 PM', 2, 0x31),
+(2, 'Green Recycling Depot', 2, 2, 2, 'Eco Road', 45637896, 'Monday to Saturday: 7:30 AM - 5:00 PM', 3, 0x31),
+(3, 'RenewCycle Collection Point', 3, 3, 3, 'Sustainable Drive', 86547832, 'Monday to Friday: 8:30 AM - 5:30 PM', 4, 0x31);
 
 -- --------------------------------------------------------
 
@@ -109,9 +109,17 @@ CREATE TABLE `color` (
 --
 
 INSERT INTO `color` (`id_color`, `name`, `value`) VALUES
-(1, 'grey', '#DDDDDA'),
-(2, 'light brown', '#E1C19E'),
-(3, 'burnt orange', '#BB7541');
+(1, 'Grey', '#DDDDDA'),
+(2, 'Light brown', '#E1C19E'),
+(3, 'Burnt orange', '#BB7541'),
+(4, 'White', '#FFFFFF'),
+(5, 'Red', '#FF0000'),
+(6, 'Green', '#00FF00'),
+(7, 'Blue', '#0000FF'),
+(8, 'Yellow', '#FFFF00'),
+(9, 'Orange', '#FFA500'),
+(10, 'Pink', '#FFC0CB'),
+(11, 'Brown', '#A52A2A');
 
 -- --------------------------------------------------------
 
@@ -308,8 +316,8 @@ CREATE TABLE `measurement` (
 
 INSERT INTO `measurement` (`id_measurement`, `name`, `value`) VALUES
 (1, 'Kilograms', 'Kg'),
-(2, 'Pounds', 'lb'),
-(3, 'Liter', 'lg');
+(2, 'Pounds', 'Lb'),
+(3, 'Litre', 'L');
 
 -- --------------------------------------------------------
 
@@ -535,7 +543,7 @@ ALTER TABLE `collection_center`
 -- AUTO_INCREMENT for table `color`
 --
 ALTER TABLE `color`
-  MODIFY `id_color` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_color` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `coupon`
@@ -553,7 +561,7 @@ ALTER TABLE `district`
 -- AUTO_INCREMENT for table `material`
 --
 ALTER TABLE `material`
-  MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `material_exchange`

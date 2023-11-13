@@ -12,7 +12,19 @@ class CollectionCenterModel
     {
         try {
             //Consulta sql
-            $vSql = "SELECT * FROM collection_center;";
+            $vSql = "SELECT 
+            collection_center.*,
+            province.name AS province_name,
+            canton.name AS canton_name,
+            district.name AS district_name,
+            CONCAT(user.name, ' ', user.surname) AS admin_name
+        FROM 
+            collection_center
+        JOIN province ON collection_center.id_province = province.id_province
+        JOIN canton ON collection_center.id_canton = canton.id_canton
+        JOIN district ON collection_center.id_district = district.id_district
+        JOIN user ON collection_center.id_user = user.id_user;
+        ";
 
             //Ejecutar la consulta
             $vResultado = $this->enlace->ExecuteSQL($vSql);
