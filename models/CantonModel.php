@@ -56,6 +56,28 @@ class CantonModel
     }
 
     /**
+     * Obtiene un cantón por el ID de la provincia.
+     *
+     * @param int $id El ID de la provincia del cantón a buscar.
+     * @return object|false Retorna un objeto Canton o false en caso de error o si no se encuentra el cantón.
+     */
+    public function getByProvince($id)
+    {
+        try {
+            // Consulta SQL
+            $vSql = "SELECT * FROM canton WHERE id_province=$id";
+
+            // Ejecutar la consulta
+            $vResultado = $this->enlace->ExecuteSQL($vSql);
+
+            // Retornar el resultado como un objeto Canton
+            return $vResultado;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    /**
      * Crea un nuevo cantón en la base de datos.
      *
      * @param object $objeto Un objeto Canton con los datos del nuevo cantón.

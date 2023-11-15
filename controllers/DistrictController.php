@@ -54,6 +54,33 @@ class district
 
     }
 
+    public function getByCanton($param)
+    {
+
+        $district = new districtModel();
+        $response = $district->getByCanton($param);
+        $json = array(
+            'status' => 200,
+            'results' => $response
+        );
+        if (isset($response) && !empty($response)) {
+            $json = array(
+                'status' => 200,
+                'results' => $response
+            );
+        } else {
+            $json = array(
+                'status' => 400,
+                'results' => "No existe el district"
+            );
+        }
+        echo json_encode(
+            $json,
+            http_response_code($json["status"])
+        );
+
+    }
+
     
 
     public function create()

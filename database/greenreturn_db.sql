@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2023 at 05:11 AM
+-- Generation Time: Nov 15, 2023 at 01:59 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -391,7 +391,10 @@ INSERT INTO `user` (`id_user`, `email`, `password`, `id_role`, `identification`,
 (2, 'Dapp0204@gmail.com', '654321', 2, 208490543, 'Carlos', 'Ruiz Vargas', 84695321, 2, 2, 2, 'Calle Almendros 400mts noroeste', 0, 0x31),
 (3, 'Luis2000@gmail.com', '123456', 2, 208470295, 'Luis', 'Rodriguez Lopez', 65789658, 3, 3, 3, 'Calle Rosas 100mts este', 0, 0x31),
 (4, 'Sof0345@gmail.com', '654321', 2, 208480789, 'Sofia', 'Valverde Gomez', 87463215, 3, 3, 3, 'Calle Canto 225mts oeste', 0, 0x31),
-(5, 'Laura123@gmail.com', '123456', 3, 207900487, 'Laura', 'Zamora Solorzano', 69854732, 1, 1, 1, 'Calle Verde', 0, 0x31);
+(5, 'Laura123@gmail.com', '123456', 3, 207900487, 'Laura', 'Zamora Solorzano', 69854732, 1, 1, 1, 'Calle Verde', 0, 0x31),
+(6, 'raquelrg@gmail.com', '123456', 2, 107900384, 'Raquel', 'Rodriguez Gomez', 63214598, 1, 1, 1, 'Calle Conejo', 0, 0x31),
+(7, 'sararam@gmail.com', '123456', 2, 901000893, 'Sara', 'Ramirez chaves', 89657412, 1, 1, 1, 'Calle Estadio', 0, 0x31),
+(8, 'elci@gmail.com', '123456', 2, 208500593, 'Elci', 'Garro Mata', 65987432, 1, 1, 1, 'Calle Cigarro', 0, 0x31);
 
 --
 -- Indexes for dumped tables
@@ -591,7 +594,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
