@@ -130,12 +130,29 @@ class MaterialModel
 			die($e->getMessage());
 		}
 	}
-	public function update($objeto)
+	public function update($objeto, $fileToUpload)
 	{
 		try {
 			//Consulta sql
-			$vSql = "Update material SET name ='$objeto->name', description = '$objeto->description', image_url = '$objeto->image_url'," .
-				"id_measurement = '$objeto->id_measurement', unit_cost = '$objeto->unit_cost', id_color = '$objeto->id_color' Where id_material=$objeto->id_material";
+
+			$target_dir = __DIR__ . "/photos/";
+		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+		$imageReference = $target_file .'.'. $imageFileType;
+				if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+					echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
+				} else {
+					echo "Sorry, there was an error uploading your file.";
+				}
+
+			$vSql = "UPDATE material 
+			SET name = '$objeto->name',
+				description = '$objeto->description',
+				image_url = '$imageReference',
+				id_measurement = '$objeto->id_measurement',
+				unit_cost = '$objeto->unit_cost',
+				id_color = '$objeto->id_color' 
+			WHERE id_material = $objeto->id_material";
 
 			//Ejecutar la consulta
 			$vResultado = $this->enlace->executeSQL_DML($vSql);
@@ -149,15 +166,12 @@ class MaterialModel
 	public function getImages() {
         $target_dir = __DIR__ . "/photos/";
         $images = [];
-
-        // Obtener lista de archivos en el directorio de imágenes
         $files = scandir($target_dir);
 
         foreach ($files as $file) {
             if ($file !== '.' && $file !== '..') {
                 $images[] = [
                     'image_url' => 'http://localhost/greenreturn_api/models/photos/' . $file,
-                    // Aquí puedes agregar más información si es necesario
                 ];
             }
         }
