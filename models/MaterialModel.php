@@ -102,7 +102,10 @@ class MaterialModel
 			//Identificador autoincrementable
 			$target_dir = __DIR__ . "/photos/";
 		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+		$target_file1 =  basename($_FILES["fileToUpload"]["name"]);
+ //http://localhost:81/greenreturn_api/models/photos/aSD.png
 		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+		$imageTotal = 'http://localhost:81/greenreturn_api/models/photos/' . $target_file1;
 		$imageReference = $target_file .'.'. $imageFileType;
 				if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 					echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
@@ -115,7 +118,7 @@ class MaterialModel
 			$vSql = "Insert into material (name, description,image_url, id_measurement, unit_cost, id_color)" .
 				"Values ('" . $objeto['name'] . "', '" .
 				 $objeto['description'] . "','" .
-				  $imageReference . "','" . 
+				  $imageTotal . "','" . 
 				  $objeto['id_measurement'] . "','" . 
 				  $objeto["unit_cost"] ."','".
 				  $objeto["id_color"] . "')";
