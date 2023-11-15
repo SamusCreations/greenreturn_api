@@ -57,17 +57,23 @@ class material
         );
 
     }
-
+    
     public function create()
     {
+       
         $inputJSON = file_get_contents('php://input');
         $object = json_decode($inputJSON);
         $material = new MaterialModel();
-        $response = $material->create($object);
-        if (isset($response) && !empty($response)) {
+        
+        
+            $response = $material->create($object);
+        
+
+        if (isset($response) && !empty($response) && isset($_FILES['fileToUpload']) ) {
             $json = array(
                 'status' => 200,
                 'results' => $response
+                
             );
         } else {
             $json = array(
