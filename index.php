@@ -44,6 +44,7 @@ require_once "controllers/CategoryController.php";
 require_once "controllers/RoleController.php";
 require_once "controllers/CouponExchangeController.php";
 require_once "controllers/MeasurementController.php";
+require_once "controllers/ImageShowe.php";
 
 
 //Enrutador
