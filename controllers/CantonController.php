@@ -54,8 +54,33 @@ class canton
 
     }
 
-    
+    public function getByProvince($param)
+    {
 
+        $canton = new cantonModel();
+        $response = $canton->getByProvince($param);
+        $json = array(
+            'status' => 200,
+            'results' => $response
+        );
+        if (isset($response) && !empty($response)) {
+            $json = array(
+                'status' => 200,
+                'results' => $response
+            );
+        } else {
+            $json = array(
+                'status' => 400,
+                'results' => "No existe el canton"
+            );
+        }
+        echo json_encode(
+            $json,
+            http_response_code($json["status"])
+        );
+
+    }
+ 
     public function create()
     {
         $inputJSON = file_get_contents('php://input');

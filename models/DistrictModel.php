@@ -56,6 +56,28 @@ class DistrictModel
     }
 
     /**
+     * Obtiene un distrito por el ID del canton.
+     *
+     * @param int $id El ID del canton del distrito a buscar.
+     * @return object|false Retorna un objeto District o false en caso de error o si no se encuentra el distrito.
+     */
+    public function getByCanton($id)
+    {
+        try {
+            // Consulta SQL
+            $vSql = "SELECT * FROM district WHERE id_canton=$id";
+
+            // Ejecutar la consulta
+            $vResultado = $this->enlace->ExecuteSQL($vSql);
+
+            // Retornar el resultado como un objeto District
+            return $vResultado;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    /**
      * Crea un nuevo distrito en la base de datos.
      *
      * @param object $objeto Un objeto District con los datos del nuevo distrito.
