@@ -57,30 +57,39 @@ class material
         );
 
     }
-    
+
     public function create()
     {
-       
-        $inputJSON = file_get_contents('php://input');
-        $object = json_decode($inputJSON);
-        $material = new MaterialModel();
-        
-        
-            $response = $material->create($object);
-        
+        $imagenDataExists = (isset($_FILES['fileToUpload']) && $_FILES['fileToUpload']['error'] === UPLOAD_ERR_OK);
 
-        if (isset($response) && !empty($response) && isset($_FILES['fileToUpload']) ) {
-            $json = array(
-                'status' => 200,
-                'results' => $response
-                
-            );
-        } else {
+        if (!$imagenDataExists) {
             $json = array(
                 'status' => 400,
-                'total' => 0,
-                'results' => "No hay registros"
+                'results' => "No se creó el recurso"
             );
+            echo json_encode($json);
+        } else {
+            $inputJSON = file_get_contents('php://input');
+            $object = json_decode($inputJSON);
+            $material = new MaterialModel();
+
+
+            $response = $material->create($_POST, $_FILES['fileToUpload']);
+
+
+            if (isset($response) && !empty($response) && isset($_FILES['fileToUpload'])) {
+                $json = array(
+                    'status' => 200,
+                    'results' => $response
+
+                );
+            } else {
+                $json = array(
+                    'status' => 400,
+                    'total' => 0,
+                    'results' => "No hay registros"
+                );
+            }
         }
         echo json_encode(
             $json,
@@ -88,6 +97,27 @@ class material
         );
 
     }
+
+    public function showImages() {
+        $material = new MaterialModel();
+        $images = $material->getImages();
+    
+        if (!empty($images)) {
+            $json = [
+                'status' => 200,
+                'results' => $images
+            ];
+        } else {
+            $json = [
+                'status' => 404,
+                'results' => 'No se encontraron imágenes'
+            ];
+        }
+    
+        header('Content-Type: application/json');
+        echo json_encode($json);
+    }
+    
 
     public function update()
     {
