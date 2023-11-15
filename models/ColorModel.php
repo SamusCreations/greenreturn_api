@@ -60,12 +60,14 @@ class ColorModel
      *
      * @return array|false Retorna un array de objetos Color o false en caso de error.
      */
-    public function getAvailables($id)
+    public function getAvailables($idMaterial)
     {
         try {
             // Consulta SQL
-            $vSql = "SELECT * FROM color
-            WHERE id_color NOT IN (SELECT id_color FROM material);";
+            $vSql = "  SELECT c.*
+            FROM color c
+            WHERE c.id_color NOT IN (SELECT id_color FROM material)
+               OR c.id_color IN (SELECT id_color FROM material WHERE id_material = $idMaterial);";
 
             // Ejecutar la consulta
             $vResultado = $this->enlace->ExecuteSQL($vSql);

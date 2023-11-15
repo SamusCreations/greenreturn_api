@@ -89,14 +89,17 @@ class UserModel
         }
     }
 
-    public function getAvailableAdministrators()
+    public function getAvailableAdministrators($idCollectionCenter)
     {
         try {
+
             //Consulta SQL
             $vSQL = "SELECT u.*
             FROM user u
             LEFT JOIN collection_center c ON u.id_user = c.id_user
-            WHERE u.id_role = 2 AND c.id_user IS NULL;";
+            WHERE u.id_role = 2
+            AND (c.id_user IS NULL OR c.id_collection_center = $idCollectionCenter);";
+
             //Establecer conexión
 
             //Ejecutar la consulta

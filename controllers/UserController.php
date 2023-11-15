@@ -81,7 +81,7 @@ class user
     {
         //Obtener el listado del Modelo
         $user = new UserModel();
-        $response = $user->getAvailableAdministrators();
+        $response = $user->getAvailableAdministrators($param);
         //Si hay respuesta
         if (isset($response) && !empty($response)) {
             //Armar el json
