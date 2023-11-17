@@ -56,6 +56,30 @@ class ColorModel
     }
 
     /**
+     * Obtiene todos los colores que no esten relacionados con un material.
+     *
+     * @return array|false Retorna un array de objetos Color o false en caso de error.
+     */
+    public function getAvailables($idMaterial)
+    {
+        try {
+            // Consulta SQL
+            $vSql = "  SELECT c.*
+            FROM color c
+            WHERE c.id_color NOT IN (SELECT id_color FROM material)
+               OR c.id_color IN (SELECT id_color FROM material WHERE id_material = $idMaterial);";
+
+            // Ejecutar la consulta
+            $vResultado = $this->enlace->ExecuteSQL($vSql);
+
+            // Retornar el resultado como un objeto Color
+            return $vResultado;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    /**
      * Crea un nuevo color en la base de datos.
      *
      * @param object $objeto Un objeto Color con los datos del nuevo color.

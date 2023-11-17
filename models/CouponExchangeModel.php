@@ -55,13 +55,13 @@ class CouponExchangeModel
                 $userModel = new UserModel();
                 $user = $userModel->get($vResultado->id_user);
                 //Asignar user al objeto  
-                $vResultado->user = $user[0];
+                $vResultado->user = $user;
 
                 //---coupon
                 $couponModel = new couponModel();
                 $coupon = $couponModel->get($vResultado->id_coupon);
                 //Asignar coupon al objeto  
-                $vResultado->coupon = $coupon[0];
+                $vResultado->coupon = $coupon;
 
             }
 

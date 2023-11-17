@@ -51,11 +51,25 @@ class MaterialExchangeModel
                 //Obtener objeto
                 $vResultado = $vResultado[0];
 
+                //---user
+                $userModel = new UserModel();
+                $user = $userModel->get($vResultado->id_user);
+                //Asignar user al objeto  
+                $vResultado->user = $user;
+
+                //---collection center
+                $ccModel = new CollectionCenterModel();
+                $cc = $ccModel->get($vResultado->id_collection_center);
+                //Asignar cc al objeto  
+                $vResultado->collection_center = $cc;
+
                 //---ExchangeDetail 
                 //Consulta sql
-                $vSql = "SELECT ed.* FROM exchange_detail ed " .
-                    "JOIN material_exchange me ON ed.id_exchange = me.id_exchange " .
-                    "WHERE me.id_exchange = $id";
+                $vSql = "SELECT ed.*, m.name
+                FROM exchange_detail ed
+                JOIN material_exchange me ON ed.id_exchange = me.id_exchange
+                JOIN material m ON ed.id_material = m.id_material
+                WHERE me.id_exchange =$id";
 
                 //Ejecutar la consulta
                 $listadoDetail = $this->enlace->ExecuteSQL($vSql);
@@ -106,9 +120,12 @@ class MaterialExchangeModel
     {
         try {
             // Consulta SQL
-            $vSql = "SELECT me.*  FROM material_exchange me 
+            $vSql = "SELECT me.*, cc.name as cc_name
+            FROM material_exchange me
             JOIN user u ON me.id_user = u.id_user
-            WHERE u.id_user = $id ORDER BY me.date_created;";
+            JOIN collection_center cc ON me.id_collection_center = cc.id_collection_center
+            WHERE u.id_user = $id
+            ORDER BY me.date_created;";
 
             // Ejecutar la consulta
             $vResultado = $this->enlace->ExecuteSQL($vSql);
@@ -177,7 +194,7 @@ class MaterialExchangeModel
 
             foreach ($details as $detail) {
                 $vSql = "INSERT INTO exchange_detail (id_exchange, id_material, quantity, unit_cost, subtotal) " .
-                    "VALUES ('$detail->id_exchange', '$detail->id_material', '$detail->quantity', '$detail->unit_cost', '$detail->subtotal')";
+                    "VALUES ('$objeto->id_exchange', '$detail->id_material', '$detail->quantity', '$detail->unit_cost', '$detail->subtotal')";
                 $this->enlace->executeSQL_DML($vSql);
             }
 

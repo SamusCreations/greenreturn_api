@@ -42,24 +42,54 @@ class material
 
     }
 
+    public function getColorByMaterialId($param)
+    {
+
+        $material = new MaterialModel();
+        $response = $material->getColorByMaterialId($param);
+        $json = array(
+            'status' => 200,
+            'results' => $response
+        );
+        echo json_encode(
+            $json,
+            http_response_code($json["status"])
+        );
+
+    }
+
     public function create()
     {
-        $inputJSON = file_get_contents('php://input');
-        $object = json_decode($inputJSON);
-        $material = new MaterialModel();
-        $response = $material->create($object);
-        if (isset($response) && !empty($response)) {
-            $json = array(
-                'status' => 200,
-/*                 'total' => count($response), */
-                'results' => $response[0]
-            );
-        } else {
+        $imagenDataExists = (isset($_FILES['fileToUpload']) && $_FILES['fileToUpload']['error'] === UPLOAD_ERR_OK);
+
+        if (!$imagenDataExists) {
             $json = array(
                 'status' => 400,
-                'total' => 0,
-                'results' => "No hay registros"
+                'results' => "No se creó el recurso"
             );
+            echo json_encode($json);
+        } else {
+            $inputJSON = file_get_contents('php://input');
+            $object = json_decode($inputJSON);
+            $material = new MaterialModel();
+
+
+            $response = $material->create($_POST, $_FILES['fileToUpload']);
+
+
+            if (isset($response) && !empty($response) && isset($_FILES['fileToUpload'])) {
+                $json = array(
+                    'status' => 200,
+                    'results' => $response
+
+                );
+            } else {
+                $json = array(
+                    'status' => 400,
+                    'total' => 0,
+                    'results' => "No hay registros"
+                );
+            }
         }
         echo json_encode(
             $json,
@@ -68,17 +98,47 @@ class material
 
     }
 
+    public function showImages() {
+        $material = new MaterialModel();
+        $images = $material->getImages();
+    
+        if (!empty($images)) {
+            $json = [
+                'status' => 200,
+                'results' => $images
+            ];
+        } else {
+            $json = [
+                'status' => 404,
+                'results' => 'No se encontraron imágenes'
+            ];
+        }
+    
+        header('Content-Type: application/json');
+        echo json_encode($json);
+    }
+
+
     public function update()
     {
+
+        $imagenDataExists = (isset($_FILES['fileToUpload']) && $_FILES['fileToUpload']['error'] === UPLOAD_ERR_OK);
+
+        if (!$imagenDataExists) {
+            $json = array(
+                'status' => 400,
+                'results' => "No se creó el recurso"
+            );
+            echo json_encode($json);
+        } else {
         $inputJSON = file_get_contents('php://input');
         $object = json_decode($inputJSON);
         $material = new MaterialModel();
-        $response = $material->update($object);
+        $response = $material->update($_POST, $_FILES('fileToUpload'));
         if (isset($response) && !empty($response)) {
             $json = array(
                 'status' => 200,
-/*                 'total' => count($response), */
-                'results' => $response[0]
+                'results' => $response
             );
         } else {
             $json = array(
@@ -87,6 +147,7 @@ class material
                 'results' => "No hay registros"
             );
         }
+    }
         echo json_encode(
             $json,
             http_response_code($json["status"])

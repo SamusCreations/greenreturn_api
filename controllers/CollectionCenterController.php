@@ -62,7 +62,6 @@ class collection_center
         if (isset($response) && !empty($response)) {
             $json = array(
                 'status' => 200,
-                /* 'total' => count($response), */
                 'results' => $response
             );
         } else {
@@ -88,7 +87,6 @@ class collection_center
         if (isset($response) && !empty($response)) {
             $json = array(
                 'status' => 200,
-/*                 'total' => count($response), */
                 'results' => $response
             );
         } else {

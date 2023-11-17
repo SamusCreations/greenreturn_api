@@ -89,14 +89,17 @@ class UserModel
         }
     }
 
-    public function getUserRoleForm($idRole)
+    public function getAvailableAdministrators($idCollectionCenter)
     {
         try {
+
             //Consulta SQL
-            $vSQL = "SELECT u.id_user, u.identification, u.`name`," .
-                " u.surname, u.email, u.id_role, r.`name`, u.`active`" .
-                " FROM `user` u, `role` r" .
-                " where u.id_role=r.id_role and r.id_role=$idRole;";
+            $vSQL = "SELECT u.*
+            FROM user u
+            LEFT JOIN collection_center c ON u.id_user = c.id_user
+            WHERE u.id_role = 2
+            AND (c.id_user IS NULL OR c.id_collection_center = $idCollectionCenter);";
+
             //Establecer conexión
 
             //Ejecutar la consulta

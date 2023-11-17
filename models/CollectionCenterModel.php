@@ -12,7 +12,19 @@ class CollectionCenterModel
     {
         try {
             //Consulta sql
-            $vSql = "SELECT * FROM collection_center;";
+            $vSql = "SELECT 
+            collection_center.*,
+            province.name AS province_name,
+            canton.name AS canton_name,
+            district.name AS district_name,
+            CONCAT(user.name, ' ', user.surname) AS admin_name
+        FROM 
+            collection_center
+        JOIN province ON collection_center.id_province = province.id_province
+        JOIN canton ON collection_center.id_canton = canton.id_canton
+        JOIN district ON collection_center.id_district = district.id_district
+        JOIN user ON collection_center.id_user = user.id_user;
+        ";
 
             //Ejecutar la consulta
             $vResultado = $this->enlace->ExecuteSQL($vSql);
@@ -40,13 +52,16 @@ class CollectionCenterModel
                 $userModel = new UserModel();
                 $adminCC = $userModel->get($vResultado->id_user);
                 //Asignar adminCC al objeto  
-                $vResultado->cc_administrator = $adminCC;
+                $vResultado->administrator = $adminCC;
 
                 //---materiales 
                 //Consulta sql
-                $vSql = "SELECT m.* FROM material m " .
-                    "JOIN material_collection mc ON m.id_material = mc.id_material " .
-                    "WHERE mc.id_collection_center = $id";
+                $vSql = "SELECT m.*, c.name as color_name, c.value as color_value 
+                FROM material m
+                JOIN material_collection mc ON m.id_material = mc.id_material
+                JOIN color c ON m.id_color = c.id_color
+                WHERE mc.id_collection_center = $id;
+                ";
 
                 //Ejecutar la consulta
                 $listadoMaterial = $this->enlace->ExecuteSQL($vSql);

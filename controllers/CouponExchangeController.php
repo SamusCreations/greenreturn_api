@@ -90,8 +90,7 @@ class coupon_exchange
         if (isset($response) && !empty($response)) {
             $json = array(
                 'status' => 200,
-                'total' => count($response),
-                'results' => $response[0]
+                'results' => $response
             );
         } else {
             $json = array(
@@ -116,8 +115,7 @@ class coupon_exchange
         if (isset($response) && !empty($response)) {
             $json = array(
                 'status' => 200,
-                'total' => count($response),
-                'results' => $response[0]
+                'results' => $response
             );
         } else {
             $json = array(
