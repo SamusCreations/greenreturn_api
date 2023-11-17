@@ -56,9 +56,12 @@ class CollectionCenterModel
 
                 //---materiales 
                 //Consulta sql
-                $vSql = "SELECT m.* FROM material m " .
-                    "JOIN material_collection mc ON m.id_material = mc.id_material " .
-                    "WHERE mc.id_collection_center = $id";
+                $vSql = "SELECT m.*, c.name as color_name, c.value as color_value 
+                FROM material m
+                JOIN material_collection mc ON m.id_material = mc.id_material
+                JOIN color c ON m.id_color = c.id_color
+                WHERE mc.id_collection_center = $id;
+                ";
 
                 //Ejecutar la consulta
                 $listadoMaterial = $this->enlace->ExecuteSQL($vSql);
