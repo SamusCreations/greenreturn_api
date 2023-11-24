@@ -141,14 +141,14 @@ class MaterialModel
 			//Consulta sql
 
 			$target_dir = __DIR__ . "/photos/";
-			$target_name = $objeto->id_material.$objeto->name;
+			$target_name = $objeto['name'].'.png';
 			$target_file = $target_dir . $target_name;
 			//$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 			$target_file1 = basename($_FILES["fileToUpload"]["name"]);
 			//http://localhost:81/greenreturn_api/models/photos/aSD.png
 			$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-			$imageTotal = 'http://localhost:81/greenreturn_api/models/photos/' . $target_file1;
-			$imageReference = $target_file . '.' . $imageFileType;
+			$imageTotal = 'http://localhost:81/greenreturn_api/models/photos/' . $target_file;
+			
 			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 				echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
 			} else {
@@ -156,9 +156,9 @@ class MaterialModel
 			}
 
 			$vSql = "UPDATE material 
-        SET name = '" . $objeto->name . "',
+        SET name = '" . $objeto['name'] . "',
             description = '" . $objeto['description'] . "',
-            image_url = '" . $imageReference . "',
+            image_url = '" . $target_file . "',
             id_measurement = '" . $objeto['id_measurement'] . "',
             unit_cost = '" . $objeto['unit_cost'] . "',
             id_color = '" . $objeto['id_color'] . "' 
