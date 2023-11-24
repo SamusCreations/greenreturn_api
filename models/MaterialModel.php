@@ -116,7 +116,7 @@ class MaterialModel
 			}
 
 
-
+// cambio de prueba
 			$vSql = "Insert into material (name, description,image_url, id_measurement, unit_cost, id_color)" .
 				"Values ('" . $objeto['name'] . "', '" .
 				$objeto['description'] . "','" .
