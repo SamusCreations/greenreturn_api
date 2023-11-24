@@ -84,13 +84,14 @@ class MaterialModel
 		}
 	}
 
-	public function uploadImagen($imagen, $imagenName) {
+	public function uploadImagen($imagen, $imagenName)
+	{
 		$fileTmpPath = $imagen['tmp_name'];
 
-		$destination = __DIR__ . '/../assets/material_images/'.$imagenName;
+		$destination = __DIR__ . '/../assets/material_images/' . $imagenName;
 
 		return move_uploaded_file($fileTmpPath, $destination);
-}
+	}
 
 
 
@@ -101,29 +102,30 @@ class MaterialModel
 			//Consulta sql
 			//Identificador autoincrementable
 			$target_dir = __DIR__ . "/photos/";
-		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-		$target_file1 =  basename($_FILES["fileToUpload"]["name"]);
- //http://localhost:81/greenreturn_api/models/photos/aSD.png
-		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-		$imageTotal = 'http://localhost:81/greenreturn_api/models/photos/' . $target_file1;
-		$imageReference = $target_file .'.'. $imageFileType;
-				if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-					echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
-				} else {
-					echo "Sorry, there was an error uploading your file.";
-				}
-			
-		
-			
+			$target_name = $objeto['name'].'.png';
+			$target_file = $target_dir . $target_name;
+			$target_file1 = basename($_FILES["fileToUpload"]["name"]);
+			//http://localhost:81/greenreturn_api/models/photos/aSD.png
+			$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+			$imageTotal = 'http://localhost:81/greenreturn_api/models/photos/' . $target_file1;
+			$imageReference = $target_file . '.' . $imageFileType;
+			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+				echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
+			} else {
+				echo "Sorry, there was an error uploading your file.";
+			}
+
+
+
 			$vSql = "Insert into material (name, description,image_url, id_measurement, unit_cost, id_color)" .
 				"Values ('" . $objeto['name'] . "', '" .
-				 $objeto['description'] . "','" .
-				  $imageTotal . "','" . 
-				  $objeto['id_measurement'] . "','" . 
-				  $objeto["unit_cost"] ."','".
-				  $objeto["id_color"] . "')";
+				$objeto['description'] . "','" .
+				$imageTotal . "','" .
+				$objeto['id_measurement'] . "','" .
+				$objeto["unit_cost"] . "','" .
+				$objeto["id_color"] . "')";
 
-				   
+
 
 			//Ejecutar la consulta
 			$vResultado = $this->enlace->executeSQL_DML_last($vSql);
@@ -139,23 +141,28 @@ class MaterialModel
 			//Consulta sql
 
 			$target_dir = __DIR__ . "/photos/";
-		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-		$imageReference = $target_file .'.'. $imageFileType;
-				if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-					echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
-				} else {
-					echo "Sorry, there was an error uploading your file.";
-				}
+			$target_name = $objeto->id_material.$objeto->name;
+			$target_file = $target_dir . $target_name;
+			//$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+			$target_file1 = basename($_FILES["fileToUpload"]["name"]);
+			//http://localhost:81/greenreturn_api/models/photos/aSD.png
+			$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+			$imageTotal = 'http://localhost:81/greenreturn_api/models/photos/' . $target_file1;
+			$imageReference = $target_file . '.' . $imageFileType;
+			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+				echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
+			} else {
+				echo "Sorry, there was an error uploading your file.";
+			}
 
 			$vSql = "UPDATE material 
-			SET name = '$objeto->name',
-				description = '$objeto->description',
-				image_url = '$imageReference',
-				id_measurement = '$objeto->id_measurement',
-				unit_cost = '$objeto->unit_cost',
-				id_color = '$objeto->id_color' 
-			WHERE id_material = $objeto->id_material";
+        SET name = '" . $objeto->name . "',
+            description = '" . $objeto['description'] . "',
+            image_url = '" . $imageReference . "',
+            id_measurement = '" . $objeto['id_measurement'] . "',
+            unit_cost = '" . $objeto['unit_cost'] . "',
+            id_color = '" . $objeto['id_color'] . "' 
+        WHERE id_material = " . $objeto['id_material'];
 
 			//Ejecutar la consulta
 			$vResultado = $this->enlace->executeSQL_DML($vSql);
@@ -166,19 +173,20 @@ class MaterialModel
 		}
 	}
 
-	public function getImages() {
-        $target_dir = __DIR__ . "/photos/";
-        $images = [];
-        $files = scandir($target_dir);
+	public function getImages()
+	{
+		$target_dir = __DIR__ . "/photos/";
+		$images = [];
+		$files = scandir($target_dir);
 
-        foreach ($files as $file) {
-            if ($file !== '.' && $file !== '..') {
-                $images[] = [
-                    'image_url' => 'http://localhost/greenreturn_api/models/photos/' . $file,
-                ];
-            }
-        }
+		foreach ($files as $file) {
+			if ($file !== '.' && $file !== '..') {
+				$images[] = [
+					'image_url' => 'http://localhost/greenreturn_api/models/photos/' . $file,
+				];
+			}
+		}
 
-        return $images;
-    }
+		return $images;
+	}
 }
