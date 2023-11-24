@@ -190,3 +190,5 @@ class MaterialModel
 		return $images;
 	}
 }
+
+//putable
