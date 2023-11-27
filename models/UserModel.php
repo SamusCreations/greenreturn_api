@@ -163,6 +163,10 @@ class UserModel
     public function update($objeto)
     {
         try {
+            if (isset($objeto->password) && $objeto->password != null) {
+                $crypt = password_hash($objeto->password, PASSWORD_BCRYPT);
+                $objeto->password = $crypt;
+            }
             //Consulta SQL
             $vSql = "UPDATE user SET email = '$objeto->email', password = '$objeto->password', id_role = $objeto->id_role, identification = $objeto->identification, " .
                 "name = '$objeto->name', surname = '$objeto->surname', telephone = $objeto->telephone, id_province = $objeto->id_province, " .

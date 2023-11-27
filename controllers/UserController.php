@@ -194,7 +194,7 @@ class user
             $data = [
                 'id_user' => $response->id_user,
                 'email' => $response->email,
-                'id_role' => $response->id_role,
+                'role' => $response->role->name,
             ];
             // Generar el token JWT 
             $jwt_token = JWT::encode($data, $this->secret_key, 'HS256');
@@ -215,7 +215,7 @@ class user
 
     }
 
-    public function autorize()
+    public function authorize()
     {
 
         try {
