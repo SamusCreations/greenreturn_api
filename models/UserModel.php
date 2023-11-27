@@ -43,23 +43,25 @@ class UserModel
                 //Asignar role al objeto  
                 $vResultado->role = $role[0];
 
-                //---province
-                $provinceModel = new ProvinceModel();
-                $province = $provinceModel->get($vResultado->id_province);
-                //Asignar province al objeto  
-                $vResultado->province = $province[0];
+                if (!empty($vResultado->id_province)) {
+                    //---province
+                    $provinceModel = new ProvinceModel();
+                    $province = $provinceModel->get($vResultado->id_province);
+                    //Asignar province al objeto  
+                    $vResultado->province = $province[0];
 
-                //---canton
-                $cantonModel = new cantonModel();
-                $canton = $cantonModel->get($vResultado->id_canton);
-                //Asignar canton al objeto  
-                $vResultado->canton = $canton[0];
+                    //---canton
+                    $cantonModel = new cantonModel();
+                    $canton = $cantonModel->get($vResultado->id_canton);
+                    //Asignar canton al objeto  
+                    $vResultado->canton = $canton[0];
 
-                //---district
-                $districtModel = new districtModel();
-                $district = $districtModel->get($vResultado->id_district);
-                //Asignar district al objeto  
-                $vResultado->district = $district[0];
+                    //---district
+                    $districtModel = new districtModel();
+                    $district = $districtModel->get($vResultado->id_district);
+                    //Asignar district al objeto  
+                    $vResultado->district = $district[0];
+                }
 
             }
             // Retornar el objeto
@@ -187,7 +189,7 @@ class UserModel
             if (is_object($vResultado[0])) {
                 $user = $vResultado[0];
                 if (password_verify($objeto->password, $user->password)) {
-                    return $this->get($user->id);
+                    return $this->get($user->id_user);
                 }
 
             } else {
