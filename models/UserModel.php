@@ -114,6 +114,10 @@ class UserModel
     public function create($objeto)
     {
         try {
+            if (isset($objeto->password) && $objeto->password != null) {
+                $crypt = password_hash($objeto->password, PASSWORD_BCRYPT);
+                $objeto->password = $crypt;
+            }
             //Consulta SQL
             $vSql = "INSERT INTO user (email, password, id_role, identification, name, surname, telephone, id_province, id_canton, id_district, address, coin, active) " .
                 "VALUES ('$objeto->email', '$objeto->password', $objeto->id_role, $objeto->identification, '$objeto->name', '$objeto->surname', $objeto->telephone, $objeto->id_province, $objeto->id_canton, $objeto->id_district, '$objeto->address', $objeto->coin, $objeto->active)";
@@ -126,6 +130,33 @@ class UserModel
             die($e->getMessage());
         }
     }
+
+    public function createForm($objeto)
+    {
+        try {
+            if (isset($objeto->password) && $objeto->password != null) {
+                $crypt = password_hash($objeto->password, PASSWORD_BCRYPT);
+                $objeto->password = $crypt;
+            }
+            // Consulta SQL con sentencia preparada
+            $vSql = "INSERT INTO user (email, password, id_role, identification, name, surname, active) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+            // Preparar la declaración SQL
+            $stmt = $this->enlace->prepare($vSql);
+
+            // Vincular los parámetros
+            $stmt->bind_param("ssisssi", $objeto->email, $objeto->password, $objeto->id_role, $objeto->identification, $objeto->name, $objeto->surname, $objeto->active);
+
+            // Ejecutar la consulta preparada
+            $stmt->execute();
+
+            // Retornar el objeto creado
+            return $this->get($stmt->insert_id);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
 
     public function update($objeto)
     {
@@ -145,5 +176,27 @@ class UserModel
         }
     }
 
+    public function login($objeto)
+    {
+        try {
+
+            $vSql = "SELECT * from User where email='$objeto->email'";
+
+            //Ejecutar la consulta
+            $vResultado = $this->enlace->ExecuteSQL($vSql);
+            if (is_object($vResultado[0])) {
+                $user = $vResultado[0];
+                if (password_verify($objeto->password, $user->password)) {
+                    return $this->get($user->id);
+                }
+
+            } else {
+                return false;
+            }
+
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 
 }
