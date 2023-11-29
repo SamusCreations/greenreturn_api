@@ -75,7 +75,7 @@ class UserModel
         try {
             //Consulta SQL
             $vSQL = "SELECT u.id_user, u.identification, u.`name`," .
-                " u.surname, u.email, u.id_role, r.`name`, u.`active`" .
+                " u.surname, u.email, u.id_role, r.`name` as role_name, u.`active`" .
                 " FROM `user` u, `role` r" .
                 " where u.id_role=r.id_role and r.id_role=$idRole;";
             //Establecer conexión

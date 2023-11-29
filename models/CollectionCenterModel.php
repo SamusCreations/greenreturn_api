@@ -152,4 +152,24 @@ class CollectionCenterModel
         }
     }
 
+    public function getCollectionByCcId($idCollectionCenter)
+{
+    try {
+        // Consulta SQL
+        $vSQL = "SELECT m.*
+                FROM material m
+                INNER JOIN material_collection mc ON m.id_material = mc.id_material
+                WHERE mc.id_collection_center = $idCollectionCenter";
+
+        // Establecer conexión
+
+        // Ejecutar la consulta
+        $vResultado = $this->enlace->executeSQL($vSQL);
+        // Retornar el resultado
+        return $vResultado;
+    } catch (Exception $e) {
+        die($e->getMessage());
+    }
+}
+
 }
