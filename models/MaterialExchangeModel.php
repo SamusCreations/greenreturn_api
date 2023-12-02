@@ -21,7 +21,11 @@ class MaterialExchangeModel
     {
         try {
             // Consulta SQL
-            $vSql = "SELECT * FROM material_exchange";
+            $vSql = "SELECT me.*, cc.name as cc_name, u.name as user_name, u.surname as user_surname
+            FROM material_exchange me
+            JOIN user u ON me.id_user = u.id_user
+            JOIN collection_center cc ON me.id_collection_center = cc.id_collection_center
+            ORDER BY me.date_created;";
 
             // Ejecutar la consulta
             $vResultado = $this->enlace->ExecuteSQL($vSql);
