@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2023 at 01:59 AM
+-- Generation Time: Nov 25, 2023 at 10:47 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -109,9 +109,9 @@ CREATE TABLE `color` (
 --
 
 INSERT INTO `color` (`id_color`, `name`, `value`) VALUES
-(1, 'Grey', '#DDDDDA'),
-(2, 'Light brown', '#E1C19E'),
-(3, 'Burnt orange', '#BB7541'),
+(1, 'Paper', '#F5EFE3'),
+(2, 'Cardboard', '#E1C19E'),
+(3, 'Iron', '#5e5e5e'),
 (4, 'White', '#FFFFFF'),
 (5, 'Red', '#FF0000'),
 (6, 'Green', '#00FF00'),
@@ -119,7 +119,14 @@ INSERT INTO `color` (`id_color`, `name`, `value`) VALUES
 (8, 'Yellow', '#FFFF00'),
 (9, 'Orange', '#FFA500'),
 (10, 'Pink', '#FFC0CB'),
-(11, 'Brown', '#A52A2A');
+(11, 'Brown', '#A52A2A'),
+(12, 'Gold', '#FFD700'),
+(13, 'Aluminium', '#888B8D'),
+(14, 'Bronze', '#967444'),
+(15, 'Copper', '#B87333'),
+(16, 'Sheet metal', '#A3796F'),
+(17, 'Carbide', '#336688'),
+(18, 'Stainless steel', '#C0C8D2');
 
 -- --------------------------------------------------------
 
@@ -245,9 +252,16 @@ CREATE TABLE `material` (
 --
 
 INSERT INTO `material` (`id_material`, `name`, `description`, `image_url`, `id_measurement`, `unit_cost`, `id_color`) VALUES
-(1, 'Paper', 'We accept clean and dry paper, free from bindings or clips.', '../../assets/paper.png', 1, 1, 1),
-(2, 'Cardboard', 'We receive corrugated cardboard and non-waxed cardboard.', '../../assets/cardboard.png', 1, 2, 2),
-(3, 'Scrap', 'We receive metals such as aluminum and steel.', '../../assets/scrap.png', 1, 5, 3);
+(1, 'Paper', 'Acceptable in recyclable form, including newspapers, magazines, or office paper.', 'http://localhost:81/greenreturn_api/models/photos/paper.png', 1, 1, 1),
+(2, 'Cardboard', 'Accepted in recyclable form, including boxes, packaging, and paperboard.', 'http://localhost:81/greenreturn_api/models/photos/cardboard.png', 1, 2, 2),
+(3, 'Iron', 'Acceptable in structural forms, like beams, bars, or old machinery parts.', 'http://localhost:81/greenreturn_api/models/photos/iron.png', 1, 6, 3),
+(4, 'Aluminium', 'Accepted in various conditions, including cans, foils, and some structural forms.', 'http://localhost:81/greenreturn_api/models/photos/aluminium.png', 1, 10, 13),
+(5, 'Gold', 'Accepted in small quantities, including jewelry, small parts, or decorative pieces.', 'http://localhost:81/greenreturn_api/models/photos/gold.png', 1, 100, 12),
+(6, 'Bronze', 'Acceptable in the form of sculptures, statues, or industrial scraps.', 'http://localhost:81/greenreturn_api/models/photos/bronze.png', 1, 15, 14),
+(7, 'Copper', 'Accepted in various forms, including wires, pipes, or electrical components.', 'http://localhost:81/greenreturn_api/models/photos/copper.png', 1, 25, 15),
+(8, 'Sheet metal', 'Accepted in various forms, including steel, aluminum, or copper sheets used in construction.', 'http://localhost:81/greenreturn_api/models/photos/sheet metal.png', 1, 4, 16),
+(9, 'Carbide', 'Acceptable in solid forms, like cutting tools or machine parts.', 'http://localhost:81/greenreturn_api/models/photos/carbide.png', 1, 8, 17),
+(10, 'Stainless steel', 'Accepted in a variety of forms, such as kitchenware, appliances, and structural components.', 'http://localhost:81/greenreturn_api/models/photos/stainless steel.png', 1, 12, 18);
 
 -- --------------------------------------------------------
 
@@ -265,12 +279,21 @@ CREATE TABLE `material_collection` (
 --
 
 INSERT INTO `material_collection` (`id_material`, `id_collection_center`) VALUES
-(1, 1),
 (1, 2),
-(2, 1),
+(2, 2),
 (2, 3),
-(3, 2),
-(3, 3);
+(3, 3),
+(4, 1),
+(5, 2),
+(6, 1),
+(6, 3),
+(7, 1),
+(7, 2),
+(8, 1),
+(9, 2),
+(9, 3),
+(10, 1),
+(10, 3);
 
 -- --------------------------------------------------------
 
@@ -387,10 +410,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `email`, `password`, `id_role`, `identification`, `name`, `surname`, `telephone`, `id_province`, `id_canton`, `id_district`, `address`, `coin`, `active`) VALUES
-(1, 'Samirr022004@gmail.com', '123456', 1, 208500499, 'Samuel', 'Romero Ramirez', 83211179, 1, 1, 1, 'San Juan, Calle Bambú 200mts sur', 0, 0x31),
-(2, 'Dapp0204@gmail.com', '654321', 2, 208490543, 'Carlos', 'Ruiz Vargas', 84695321, 2, 2, 2, 'Calle Almendros 400mts noroeste', 0, 0x31),
-(3, 'Luis2000@gmail.com', '123456', 2, 208470295, 'Luis', 'Rodriguez Lopez', 65789658, 3, 3, 3, 'Calle Rosas 100mts este', 0, 0x31),
-(4, 'Sof0345@gmail.com', '654321', 2, 208480789, 'Sofia', 'Valverde Gomez', 87463215, 3, 3, 3, 'Calle Canto 225mts oeste', 0, 0x31),
+(1, 'Samirr022004@gmail.com', '123456', 1, 208500499, 'Samuel', 'Romero Ramirez', 83211179, 1, 1, 1, 'Calle Bambúr', 0, 0x31),
+(2, 'Dapp0204@gmail.com', '654321', 2, 208490543, 'Carlos', 'Ruiz Vargas', 84695321, 2, 2, 2, 'Calle Almendros', 0, 0x31),
+(3, 'Luis2000@gmail.com', '123456', 2, 208470295, 'Luis', 'Rodriguez Lopez', 65789658, 3, 3, 3, 'Calle Rosas', 0, 0x31),
+(4, 'Sof0345@gmail.com', '654321', 2, 208480789, 'Sofia', 'Valverde Gomez', 87463215, 3, 3, 3, 'Calle Canto', 0, 0x31),
 (5, 'Laura123@gmail.com', '123456', 3, 207900487, 'Laura', 'Zamora Solorzano', 69854732, 1, 1, 1, 'Calle Verde', 0, 0x31),
 (6, 'raquelrg@gmail.com', '123456', 2, 107900384, 'Raquel', 'Rodriguez Gomez', 63214598, 1, 1, 1, 'Calle Conejo', 0, 0x31),
 (7, 'sararam@gmail.com', '123456', 2, 901000893, 'Sara', 'Ramirez chaves', 89657412, 1, 1, 1, 'Calle Estadio', 0, 0x31),
@@ -546,7 +569,7 @@ ALTER TABLE `collection_center`
 -- AUTO_INCREMENT for table `color`
 --
 ALTER TABLE `color`
-  MODIFY `id_color` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_color` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `coupon`
@@ -564,7 +587,7 @@ ALTER TABLE `district`
 -- AUTO_INCREMENT for table `material`
 --
 ALTER TABLE `material`
-  MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `material_exchange`

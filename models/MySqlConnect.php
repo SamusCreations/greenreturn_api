@@ -114,4 +114,27 @@ class MySqlConnect
 			throw new \Exception('Error: ' . $e->getMessage());
 		}
 	}
+
+	/**
+	 * Preparar una sentencia SQL
+	 * @param string $sql - Sentencia SQL a preparar
+	 * @return mysqli_stmt|false - Devuelve una sentencia preparada o false si hay un error
+	 */
+	public function prepare($sql)
+	{
+		try {
+			$this->connect();
+			$stmt = $this->link->prepare($sql);
+
+			if ($stmt === false) {
+				throw new \Exception('Error preparing statement: ' . $this->link->error);
+			}
+
+			return $stmt;
+		} catch (Exception $e) {
+			throw new \Exception('Error: ' . $e->getMessage());
+		}
+	}
+
 }
+

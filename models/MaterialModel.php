@@ -51,6 +51,21 @@ class MaterialModel
 				//Asignar measurement al objeto  
 				$vResultado->measurement = $measurement[0];
 
+				//---collection centers 
+				//Consulta sql
+				$vSql = "SELECT cc.*
+				FROM collection_center cc
+				JOIN material_collection mc ON cc.id_collection_center = mc.id_collection_center
+				JOIN material m ON mc.id_material = m.id_material
+				WHERE m.id_material = $id;
+                ";
+
+				//Ejecutar la consulta
+				$listadoCC = $this->enlace->ExecuteSQL($vSql);
+
+				//Asignar materiales al objeto
+				$vResultado->collection_centers = $listadoCC;
+
 			}
 			// Retornar el objeto
 			return $vResultado;
@@ -102,7 +117,7 @@ class MaterialModel
 			//Consulta sql
 			//Identificador autoincrementable
 			$target_dir = __DIR__ . "/photos/";
-			$target_name = $objeto['name'].'.png';
+			$target_name = $objeto['name'] . '.png';
 			$target_file = $target_dir . $target_name;
 			$target_file1 = basename($_FILES["fileToUpload"]["name"]);
 			//http://localhost:81/greenreturn_api/models/photos/aSD.png
@@ -116,7 +131,7 @@ class MaterialModel
 			}
 
 
-
+			// cambio de prueba
 			$vSql = "Insert into material (name, description,image_url, id_measurement, unit_cost, id_color)" .
 				"Values ('" . $objeto['name'] . "', '" .
 				$objeto['description'] . "','" .
@@ -141,14 +156,14 @@ class MaterialModel
 			//Consulta sql
 
 			$target_dir = __DIR__ . "/photos/";
-			$target_name = $objeto->id_material.$objeto->name;
+			$target_name = $objeto['name'] . '.png';
 			$target_file = $target_dir . $target_name;
 			//$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 			$target_file1 = basename($_FILES["fileToUpload"]["name"]);
 			//http://localhost:81/greenreturn_api/models/photos/aSD.png
 			$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-			$imageTotal = 'http://localhost:81/greenreturn_api/models/photos/' . $target_file1;
-			$imageReference = $target_file . '.' . $imageFileType;
+			$imageTotal = 'http://localhost:81/greenreturn_api/models/photos/' . $target_file;
+
 			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 				echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
 			} else {
@@ -156,9 +171,9 @@ class MaterialModel
 			}
 
 			$vSql = "UPDATE material 
-        SET name = '" . $objeto->name . "',
+        SET name = '" . $objeto['name'] . "',
             description = '" . $objeto['description'] . "',
-            image_url = '" . $imageReference . "',
+            image_url = '" . $target_file . "',
             id_measurement = '" . $objeto['id_measurement'] . "',
             unit_cost = '" . $objeto['unit_cost'] . "',
             id_color = '" . $objeto['id_color'] . "' 
@@ -190,3 +205,5 @@ class MaterialModel
 		return $images;
 	}
 }
+
+//putable

@@ -43,23 +43,25 @@ class UserModel
                 //Asignar role al objeto  
                 $vResultado->role = $role[0];
 
-                //---province
-                $provinceModel = new ProvinceModel();
-                $province = $provinceModel->get($vResultado->id_province);
-                //Asignar province al objeto  
-                $vResultado->province = $province[0];
+                if (!empty($vResultado->id_province)) {
+                    //---province
+                    $provinceModel = new ProvinceModel();
+                    $province = $provinceModel->get($vResultado->id_province);
+                    //Asignar province al objeto  
+                    $vResultado->province = $province[0];
 
-                //---canton
-                $cantonModel = new cantonModel();
-                $canton = $cantonModel->get($vResultado->id_canton);
-                //Asignar canton al objeto  
-                $vResultado->canton = $canton[0];
+                    //---canton
+                    $cantonModel = new cantonModel();
+                    $canton = $cantonModel->get($vResultado->id_canton);
+                    //Asignar canton al objeto  
+                    $vResultado->canton = $canton[0];
 
-                //---district
-                $districtModel = new districtModel();
-                $district = $districtModel->get($vResultado->id_district);
-                //Asignar district al objeto  
-                $vResultado->district = $district[0];
+                    //---district
+                    $districtModel = new districtModel();
+                    $district = $districtModel->get($vResultado->id_district);
+                    //Asignar district al objeto  
+                    $vResultado->district = $district[0];
+                }
 
             }
             // Retornar el objeto
@@ -75,7 +77,7 @@ class UserModel
         try {
             //Consulta SQL
             $vSQL = "SELECT u.id_user, u.identification, u.`name`," .
-                " u.surname, u.email, u.id_role, r.`name`, u.`active`" .
+                " u.surname, u.email, u.id_role, r.`name` as role_name, u.`active`" .
                 " FROM `user` u, `role` r" .
                 " where u.id_role=r.id_role and r.id_role=$idRole;";
             //Establecer conexión
@@ -114,6 +116,10 @@ class UserModel
     public function create($objeto)
     {
         try {
+            if (isset($objeto->password) && $objeto->password != null) {
+                $crypt = password_hash($objeto->password, PASSWORD_BCRYPT);
+                $objeto->password = $crypt;
+            }
             //Consulta SQL
             $vSql = "INSERT INTO user (email, password, id_role, identification, name, surname, telephone, id_province, id_canton, id_district, address, coin, active) " .
                 "VALUES ('$objeto->email', '$objeto->password', $objeto->id_role, $objeto->identification, '$objeto->name', '$objeto->surname', $objeto->telephone, $objeto->id_province, $objeto->id_canton, $objeto->id_district, '$objeto->address', $objeto->coin, $objeto->active)";
@@ -127,9 +133,40 @@ class UserModel
         }
     }
 
+    public function createForm($objeto)
+    {
+        try {
+            if (isset($objeto->password) && $objeto->password != null) {
+                $crypt = password_hash($objeto->password, PASSWORD_BCRYPT);
+                $objeto->password = $crypt;
+            }
+            // Consulta SQL con sentencia preparada
+            $vSql = "INSERT INTO user (email, password, id_role, identification, name, surname, active) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+            // Preparar la declaración SQL
+            $stmt = $this->enlace->prepare($vSql);
+
+            // Vincular los parámetros
+            $stmt->bind_param("ssisssi", $objeto->email, $objeto->password, $objeto->id_role, $objeto->identification, $objeto->name, $objeto->surname, $objeto->active);
+
+            // Ejecutar la consulta preparada
+            $stmt->execute();
+
+            // Retornar el objeto creado
+            return $this->get($stmt->insert_id);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+
     public function update($objeto)
     {
         try {
+            if (isset($objeto->password) && $objeto->password != null) {
+                $crypt = password_hash($objeto->password, PASSWORD_BCRYPT);
+                $objeto->password = $crypt;
+            }
             //Consulta SQL
             $vSql = "UPDATE user SET email = '$objeto->email', password = '$objeto->password', id_role = $objeto->id_role, identification = $objeto->identification, " .
                 "name = '$objeto->name', surname = '$objeto->surname', telephone = $objeto->telephone, id_province = $objeto->id_province, " .
@@ -145,5 +182,27 @@ class UserModel
         }
     }
 
+    public function login($objeto)
+    {
+        try {
+
+            $vSql = "SELECT * from User where email='$objeto->email'";
+
+            //Ejecutar la consulta
+            $vResultado = $this->enlace->ExecuteSQL($vSql);
+            if (is_object($vResultado[0])) {
+                $user = $vResultado[0];
+                if (password_verify($objeto->password, $user->password)) {
+                    return $this->get($user->id_user);
+                }
+
+            } else {
+                return false;
+            }
+
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 
 }
