@@ -111,8 +111,8 @@ class user
     {
         $inputJSON = file_get_contents('php://input');
         $object = json_decode($inputJSON);
-        $material = new UserModel();
-        $response = $material->create($object);
+        $user = new UserModel();
+        $response = $user->create($object);
         if (isset($response) && !empty($response)) {
             $json = array(
                 'status' => 200,
@@ -131,13 +131,13 @@ class user
         );
 
     }
-    
+
     public function createForm()
     {
         $inputJSON = file_get_contents('php://input');
         $object = json_decode($inputJSON);
-        $material = new UserModel();
-        $response = $material->createForm($object);
+        $user = new UserModel();
+        $response = $user->createForm($object);
         if (isset($response) && !empty($response)) {
             $json = array(
                 'status' => 200,
@@ -161,8 +161,8 @@ class user
     {
         $inputJSON = file_get_contents('php://input');
         $object = json_decode($inputJSON);
-        $material = new UserModel();
-        $response = $material->update($object);
+        $user = new UserModel();
+        $response = $user->update($object);
         if (isset($response) && !empty($response)) {
             $json = array(
                 'status' => 200,
@@ -194,7 +194,7 @@ class user
             $data = [
                 'id_user' => $response->id_user,
                 'email' => $response->email,
-                'role' => $response->role->name,
+                'role' => $response->role->name
             ];
             // Generar el token JWT 
             $jwt_token = JWT::encode($data, $this->secret_key, 'HS256');
@@ -236,4 +236,57 @@ class user
             return false;
         }
     }
+
+    public function addCoins()
+    {
+        $inputJSON = file_get_contents('php://input');
+        $object = json_decode($inputJSON);
+        $user = new UserModel();
+        $response = $user->addCoins($object);
+        if (isset($response) && !empty($response)) {
+            $json = array(
+                'status' => 200,
+                'results' => $response
+            );
+        } else {
+            $json = array(
+                'status' => 400,
+                'total' => 0,
+                'results' => "No hay registros"
+            );
+        }
+        echo json_encode(
+            $json,
+            http_response_code($json["status"])
+        );
+
+    }
+
+    public function getWallet($param)
+    {
+
+        $user = new UserModel();
+        $response = $user->getWallet($param);
+        $json = array(
+            'status' => 200,
+            'results' => $response
+        );
+        if (isset($response) && !empty($response)) {
+            $json = array(
+                'status' => 200,
+                'results' => $response
+            );
+        } else {
+            $json = array(
+                'status' => 400,
+                'results' => "No existe el user"
+            );
+        }
+        echo json_encode(
+            $json,
+            http_response_code($json["status"])
+        );
+
+    }
+
 }

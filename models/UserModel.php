@@ -12,7 +12,8 @@ class UserModel
     {
         try {
             //Consulta sql
-            $vSql = "SELECT * FROM user;";
+            $vSql = "SELECT id_user, email, id_role, identification, name, surname, telephone, id_province,
+            id_canton, id_district, address, coin, active FROM user;";
 
             //Ejecutar la consulta
             $vResultado = $this->enlace->ExecuteSQL($vSql);
@@ -29,7 +30,8 @@ class UserModel
     {
         try {
             //Consulta sql
-            $vSql = "SELECT * FROM user where id_user=$id";
+            $vSql = "SELECT id_user, email, id_role, identification, name, surname, telephone, id_province,
+            id_canton, id_district, address, coin, active FROM user where id_user=$id;";
 
             //Ejecutar la consulta
             $vResultado = $this->enlace->ExecuteSQL($vSql);
@@ -141,13 +143,13 @@ class UserModel
                 $objeto->password = $crypt;
             }
             // Consulta SQL con sentencia preparada
-            $vSql = "INSERT INTO user (email, password, id_role, identification, name, surname, active) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $vSql = "INSERT INTO user (email, password, id_role, identification, name, surname, active, coin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             // Preparar la declaración SQL
             $stmt = $this->enlace->prepare($vSql);
 
             // Vincular los parámetros
-            $stmt->bind_param("ssisssi", $objeto->email, $objeto->password, $objeto->id_role, $objeto->identification, $objeto->name, $objeto->surname, $objeto->active);
+            $stmt->bind_param("ssisssi", $objeto->email, $objeto->password, $objeto->id_role, $objeto->identification, $objeto->name, $objeto->surname, $objeto->active, $objeto->coin);
 
             // Ejecutar la consulta preparada
             $stmt->execute();
@@ -163,18 +165,24 @@ class UserModel
     public function update($objeto)
     {
         try {
+            // Inicializar parte de la consulta para actualizar contraseña
+            $passwordUpdate = ", password = password";
+
+            // Verificar si se proporcionó una nueva contraseña
             if (isset($objeto->password) && $objeto->password != null) {
                 $crypt = password_hash($objeto->password, PASSWORD_BCRYPT);
-                $objeto->password = $crypt;
+                $passwordUpdate = ", password = '$crypt'";
             }
-            //Consulta SQL
-            $vSql = "UPDATE user SET email = '$objeto->email', password = '$objeto->password', id_role = $objeto->id_role, identification = $objeto->identification, " .
+
+            // Consulta SQL
+            $vSql = "UPDATE user SET email = '$objeto->email' $passwordUpdate, id_role = $objeto->id_role, identification = $objeto->identification, " .
                 "name = '$objeto->name', surname = '$objeto->surname', telephone = $objeto->telephone, id_province = $objeto->id_province, " .
                 "id_canton = $objeto->id_canton, id_district = $objeto->id_district, address = '$objeto->address', coin = $objeto->coin, active = $objeto->active " .
                 "WHERE id_user = $objeto->id_user";
 
-            //Ejecutar la consulta
+            // Ejecutar la consulta
             $vResultado = $this->enlace->executeSQL_DML($vSql);
+
             // Retornar el objeto actualizado
             return $this->get($objeto->id_user);
         } catch (Exception $e) {
@@ -200,6 +208,50 @@ class UserModel
                 return false;
             }
 
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function addCoins($objeto)
+    {
+        try {
+            $vSQL = "UPDATE user SET coin = coin + $objeto->coin WHERE id_user = $objeto->id_user;";
+
+            //Ejecutar la consulta
+            $vResultado = $this->enlace->executeSQL_DML($vSQL);
+            //Retornar el resultado
+            return $this->get($objeto->id_user);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function getWallet($id)
+    {
+        try {
+            //Total de ecomonedas disponibles
+            $vSQL = "SELECT coin AS available FROM user WHERE id_user = $id";
+
+            //Ejecutar la consulta
+            $vResultado = $this->enlace->executeSQL($vSQL);
+
+            if (!empty($vResultado)) {
+                //Obtener objeto
+                $vResultado = $vResultado[0];
+
+                //Total de ecomonedas canjeadas por cupones
+                $vSQL = "SELECT SUM(unit_cost) as exchanged
+                FROM coupon_exchange
+                WHERE id_user = $id
+                GROUP BY id_user;";
+
+                $vExchanged = $this->enlace->executeSQL($vSQL);
+                $vResultado->exchanged = !empty($vExchanged)? $vExchanged[0]: "0";
+
+            }
+            //Retornar el resultado
+            return $vResultado;
         } catch (Exception $e) {
             die($e->getMessage());
         }
