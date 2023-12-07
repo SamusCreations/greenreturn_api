@@ -119,11 +119,7 @@ class MaterialModel
 			$target_dir = __DIR__ . "/photos/";
 			$target_name = $objeto['name'] . '.png';
 			$target_file = $target_dir . $target_name;
-			$target_file1 = basename($_FILES["fileToUpload"]["name"]);
-			//http://localhost:81/greenreturn_api/models/photos/aSD.png
-			$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-			$imageTotal = 'http://localhost:81/greenreturn_api/models/photos/' . $target_file1;
-			$imageReference = $target_file . '.' . $imageFileType;
+			$imageTotal = 'http://localhost:81/greenreturn_api/models/photos/' . $target_name;
 			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 				echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
 			} else {
@@ -158,11 +154,7 @@ class MaterialModel
 			$target_dir = __DIR__ . "/photos/";
 			$target_name = $objeto['name'] . '.png';
 			$target_file = $target_dir . $target_name;
-			//$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-			$target_file1 = basename($_FILES["fileToUpload"]["name"]);
-			//http://localhost:81/greenreturn_api/models/photos/aSD.png
-			$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-			$imageTotal = 'http://localhost:81/greenreturn_api/models/photos/' . $target_file;
+			$imageTotal = 'http://localhost:81/greenreturn_api/models/photos/' . $target_name;
 
 			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 				echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
@@ -173,7 +165,7 @@ class MaterialModel
 			$vSql = "UPDATE material 
         SET name = '" . $objeto['name'] . "',
             description = '" . $objeto['description'] . "',
-            image_url = '" . $target_file . "',
+            image_url = '" . $imageTotal . "',
             id_measurement = '" . $objeto['id_measurement'] . "',
             unit_cost = '" . $objeto['unit_cost'] . "',
             id_color = '" . $objeto['id_color'] . "' 
@@ -188,22 +180,7 @@ class MaterialModel
 		}
 	}
 
-	public function getImages()
-	{
-		$target_dir = __DIR__ . "/photos/";
-		$images = [];
-		$files = scandir($target_dir);
-
-		foreach ($files as $file) {
-			if ($file !== '.' && $file !== '..') {
-				$images[] = [
-					'image_url' => 'http://localhost/greenreturn_api/models/photos/' . $file,
-				];
-			}
-		}
-
-		return $images;
-	}
+	
 }
 
 //putable
