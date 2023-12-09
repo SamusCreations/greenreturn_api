@@ -182,6 +182,31 @@ class user
 
     }
 
+    public function changePassword()
+    {
+        $inputJSON = file_get_contents('php://input');
+        $object = json_decode($inputJSON);
+        $user = new UserModel();
+        $response = $user->changePassword($object);
+        if (isset($response) && !empty($response)) {
+            $json = array(
+                'status' => 200,
+                'results' => $response
+            );
+        } else {
+            $json = array(
+                'status' => 400,
+                'total' => 0,
+                'results' => "No hay registros"
+            );
+        }
+        echo json_encode(
+            $json,
+            http_response_code($json["status"])
+        );
+
+    }
+
     public function login()
     {
 
@@ -194,7 +219,8 @@ class user
             $data = [
                 'id_user' => $response->id_user,
                 'email' => $response->email,
-                'role' => $response->role->name
+                'role' => $response->role->name,
+                'id_collection_center'
             ];
             // Generar el token JWT 
             $jwt_token = JWT::encode($data, $this->secret_key, 'HS256');
@@ -217,7 +243,6 @@ class user
 
     public function authorize()
     {
-
         try {
 
             $token = null;

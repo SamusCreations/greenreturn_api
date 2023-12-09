@@ -52,6 +52,32 @@ class collection_center
         );
 
     }
+    public function getByUser($id)
+    {
+
+        $center = new CollectionCenterModel();
+        $response = $center->getByUser($id);
+        $json = array(
+            'status' => 200,
+            'results' => $response
+        );
+        if (isset($response) && !empty($response)) {
+            $json = array(
+                'status' => 200,
+                'results' => $response
+            );
+        } else {
+            $json = array(
+                'status' => 400,
+                'results' => "No existe el Collection Center"
+            );
+        }
+        echo json_encode(
+            $json,
+            http_response_code($json["status"])
+        );
+
+    }
 
     public function create()
     {
@@ -94,33 +120,6 @@ class collection_center
                 'status' => 400,
                 'total' => 0,
                 'results' => "No hay registros"
-            );
-        }
-        echo json_encode(
-            $json,
-            http_response_code($json["status"])
-        );
-
-    }
-
-    public function getColletionByCcId($idCollectionCenter)
-    {
-
-        $center = new CollectionCenterModel();
-        $response = $center->getCollectionByCcId($idCollectionCenter);
-        $json = array(
-            'status' => 200,
-            'results' => $response
-        );
-        if (isset($response) && !empty($response)) {
-            $json = array(
-                'status' => 200,
-                'results' => $response
-            );
-        } else {
-            $json = array(
-                'status' => 400,
-                'results' => "No existe el Collection Center"
             );
         }
         echo json_encode(

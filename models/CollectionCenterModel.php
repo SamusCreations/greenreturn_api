@@ -17,13 +17,16 @@ class CollectionCenterModel
             province.name AS province_name,
             canton.name AS canton_name,
             district.name AS district_name,
-            CONCAT(user.name, ' ', user.surname) AS admin_name
+            CONCAT(user.name, ' ', user.surname) AS admin_name,
+            GROUP_CONCAT(material_collection.id_material) AS materials
         FROM 
             collection_center
         JOIN province ON collection_center.id_province = province.id_province
         JOIN canton ON collection_center.id_canton = canton.id_canton
         JOIN district ON collection_center.id_district = district.id_district
-        JOIN user ON collection_center.id_user = user.id_user;
+        JOIN user ON collection_center.id_user = user.id_user
+        LEFT JOIN material_collection ON collection_center.id_collection_center = material_collection.id_collection_center
+        GROUP BY collection_center.id_collection_center;
         ";
 
             //Ejecutar la consulta
@@ -94,6 +97,66 @@ class CollectionCenterModel
             die($e->getMessage());
         }
     }
+    public function getByUser($idUser)
+    {
+        try {
+
+            $vSql = "SELECT * from collection_center where id_user = $idUser";
+
+            //Ejecutar la consulta sql
+            $vResultado = $this->enlace->executeSQL($vSql);
+            if (!empty($vResultado)) {
+                //Obtener objeto
+                $vResultado = $vResultado[0];
+
+                //---adminCC
+                $userModel = new UserModel();
+                $adminCC = $userModel->get($vResultado->id_user);
+                //Asignar adminCC al objeto  
+                $vResultado->administrator = $adminCC;
+
+                //---materiales 
+                //Consulta sql
+                $vSql = "SELECT m.*, c.name as color_name, c.value as color_value 
+                FROM material m
+                JOIN material_collection mc ON m.id_material = mc.id_material
+                JOIN color c ON m.id_color = c.id_color
+                WHERE mc.id_collection_center = $vResultado->id_collection_center;
+                ";
+
+                //Ejecutar la consulta
+                $listadoMaterial = $this->enlace->ExecuteSQL($vSql);
+
+                //Asignar materiales al objeto
+                $vResultado->materials = $listadoMaterial;
+
+                //---province
+                $provinceModel = new ProvinceModel();
+                $province = $provinceModel->get($vResultado->id_province);
+                //Asignar province al objeto  
+                $vResultado->province = $province[0];
+
+                //---canton
+                $cantonModel = new cantonModel();
+                $canton = $cantonModel->get($vResultado->id_canton);
+                //Asignar canton al objeto  
+                $vResultado->canton = $canton[0];
+
+                //---district
+                $districtModel = new districtModel();
+                $district = $districtModel->get($vResultado->id_district);
+                //Asignar district al objeto  
+                $vResultado->district = $district[0];
+
+            }
+            //Retornar la respuesta
+            return $vResultado;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+
 
     public function create($objeto)
     {
@@ -151,25 +214,5 @@ class CollectionCenterModel
             die($e->getMessage());
         }
     }
-
-    public function getCollectionByCcId($idCollectionCenter)
-{
-    try {
-        // Consulta SQL
-        $vSQL = "SELECT m.*
-                FROM material m
-                INNER JOIN material_collection mc ON m.id_material = mc.id_material
-                WHERE mc.id_collection_center = $idCollectionCenter";
-
-        // Establecer conexión
-
-        // Ejecutar la consulta
-        $vResultado = $this->enlace->executeSQL($vSQL);
-        // Retornar el resultado
-        return $vResultado;
-    } catch (Exception $e) {
-        die($e->getMessage());
-    }
-}
 
 }
