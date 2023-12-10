@@ -95,13 +95,25 @@ class MaterialExchangeModel
      * @param int $id El ID del centro de acopio a buscar.
      * @return object|false Retorna un array de objetos MaterialExchange o false en caso de error o si no se encuentra el centro de acopio.
      */
-    public function getCollectionCenterHistory($id)
+    public function getCollectionCenterHistory($id_user)
     {
         try {
             // Consulta SQL
-            $vSql = "SELECT me.* FROM material_exchange me 
-         JOIN collection_center cc ON me.id_collection_center = cc.id_collection_center
-         WHERE cc.id_collection_center = $id ORDER BY me.date_created;";
+            $vSql = "SELECT 
+            me.*, 
+            CONCAT(u.name, ' ', u.surname) AS user_name,
+            cc.name
+        FROM 
+            material_exchange me
+        JOIN 
+            collection_center cc ON me.id_collection_center = cc.id_collection_center
+        JOIN 
+            user u ON me.id_user = u.id_user
+        WHERE 
+            cc.id_collection_center = $id_user
+        ORDER BY 
+            me.date_created;        
+        ";
 
 
             // Ejecutar la consulta

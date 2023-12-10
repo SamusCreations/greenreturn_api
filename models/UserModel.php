@@ -12,8 +12,32 @@ class UserModel
     {
         try {
             //Consulta sql
-            $vSql = "SELECT id_user, email, id_role, identification, name, surname, telephone, id_province,
-            id_canton, id_district, address, coin, active FROM user;";
+            $vSql = "SELECT 
+            u.id_user, 
+            u.email, 
+            u.id_role, 
+            u.identification, 
+            u.name, 
+            u.surname, 
+            u.telephone, 
+            u.id_province,
+            u.id_canton, 
+            u.id_district, 
+            u.address, 
+            u.coin, 
+            u.active,
+            p.name AS province_name,
+            c.name AS canton_name,
+            d.name AS district_name
+        FROM 
+            user u
+        JOIN 
+            province p ON u.id_province = p.id_province
+        JOIN 
+            canton c ON u.id_canton = c.id_canton
+        JOIN 
+            district d ON u.id_district = d.id_district;
+        ";
 
             //Ejecutar la consulta
             $vResultado = $this->enlace->ExecuteSQL($vSql);
@@ -149,7 +173,7 @@ class UserModel
             $stmt = $this->enlace->prepare($vSql);
 
             // Vincular los parámetros
-            $stmt->bind_param("ssisssi", $objeto->email, $objeto->password, $objeto->id_role, $objeto->identification, $objeto->name, $objeto->surname, $objeto->active, $objeto->coin);
+            $stmt->bind_param("ssisssii", $objeto->email, $objeto->password, $objeto->id_role, $objeto->identification, $objeto->name, $objeto->surname, $objeto->active, $objeto->coin);
 
             // Ejecutar la consulta preparada
             $stmt->execute();
@@ -275,6 +299,23 @@ class UserModel
             }
             //Retornar el resultado
             return $vResultado;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function disable($objeto)
+    {
+        try {
+            //Consulta SQL
+            $vSql = "UPDATE user SET active = $objeto->active 
+                WHERE id_user = $objeto->id_user;";
+
+            //Ejecutar la consulta
+            $vResultado = $this->enlace->executeSQL_DML($vSql);
+
+            //Retornar centro de acopio
+            return $this->get($objeto->id_user);
         } catch (Exception $e) {
             die($e->getMessage());
         }

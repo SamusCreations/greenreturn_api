@@ -128,4 +128,29 @@ class collection_center
         );
 
     }
+
+    public function disable()
+    {
+        $inputJSON = file_get_contents('php://input');
+        $object = json_decode($inputJSON);
+        $CollectionCenter = new CollectionCenterModel();
+        $response = $CollectionCenter->disable($object);
+        if (isset($response) && !empty($response)) {
+            $json = array(
+                'status' => 200,
+                'results' => $response
+            );
+        } else {
+            $json = array(
+                'status' => 400,
+                'total' => 0,
+                'results' => "No hay registros"
+            );
+        }
+        echo json_encode(
+            $json,
+            http_response_code($json["status"])
+        );
+
+    }
 }

@@ -220,7 +220,6 @@ class user
                 'id_user' => $response->id_user,
                 'email' => $response->email,
                 'role' => $response->role->name,
-                'id_collection_center'
             ];
             // Generar el token JWT 
             $jwt_token = JWT::encode($data, $this->secret_key, 'HS256');
@@ -305,6 +304,31 @@ class user
             $json = array(
                 'status' => 400,
                 'results' => "No existe el user"
+            );
+        }
+        echo json_encode(
+            $json,
+            http_response_code($json["status"])
+        );
+
+    }
+
+    public function disable()
+    {
+        $inputJSON = file_get_contents('php://input');
+        $object = json_decode($inputJSON);
+        $user = new UserModel();
+        $response = $user->disable($object);
+        if (isset($response) && !empty($response)) {
+            $json = array(
+                'status' => 200,
+                'results' => $response
+            );
+        } else {
+            $json = array(
+                'status' => 400,
+                'total' => 0,
+                'results' => "No hay registros"
             );
         }
         echo json_encode(
