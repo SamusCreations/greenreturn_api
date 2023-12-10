@@ -110,23 +110,23 @@ class material
             );
             echo json_encode($json);
         } else {
-        $inputJSON = file_get_contents('php://input');
-        $object = json_decode($inputJSON);
-        $material = new MaterialModel();
-        $response = $material->update($_POST, $_FILES['fileToUpload']);
-        if (isset($response) && !empty($response)) {
-            $json = array(
-                'status' => 200,
-                'results' => $response
-            );
-        } else {
-            $json = array(
-                'status' => 400,
-                'total' => 0,
-                'results' => "No hay registros"
-            );
+            $inputJSON = file_get_contents('php://input');
+            $object = json_decode($inputJSON);
+            $material = new MaterialModel();
+            $response = $material->update($_POST, $_FILES['fileToUpload']);
+            if (isset($response) && !empty($response)) {
+                $json = array(
+                    'status' => 200,
+                    'results' => $response
+                );
+            } else {
+                $json = array(
+                    'status' => 400,
+                    'total' => 0,
+                    'results' => "No hay registros"
+                );
+            }
         }
-    }
         echo json_encode(
             $json,
             http_response_code($json["status"])

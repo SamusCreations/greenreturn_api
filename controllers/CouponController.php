@@ -27,6 +27,31 @@ class coupon
         );
     }
 
+    public function availableCoupons()
+    {
+        //Obtener el listado del Modelo
+        $coupon = new CouponModel();
+        $response = [];
+        $response = $coupon->availableCoupons();
+        //Si hay respuesta
+        if (isset($response) && !empty($response)) {
+            //Armar el json
+            $json = array(
+                'status' => 200,
+                'results' => $response
+            );
+        } else {
+            $json = array(
+                'status' => 400,
+                'results' => "No hay registros"
+            );
+        }
+        echo json_encode(
+            $json,
+            http_response_code($json["status"])
+        );
+    }
+
     public function get($param)
     {
 
@@ -54,7 +79,7 @@ class coupon
 
     }
 
-    
+
 
     public function create()
     {
@@ -67,23 +92,23 @@ class coupon
             echo json_encode($json);
         } else {
             $inputJSON = file_get_contents('php://input');
-        $object = json_decode($inputJSON);
-        $coupon = new CouponModel();
-        $response = $coupon->create($_POST, $_FILES['fileToUpload']);
-        if (isset($response) && !empty($response)) {
-            $json = array(
-                'status' => 200,
-                'results' => $response
-            );
-        } else {
-            $json = array(
-                'status' => 400,
-                'total' => 0,
-                'results' => "No hay registros"
-            );
+            $object = json_decode($inputJSON);
+            $coupon = new CouponModel();
+            $response = $coupon->create($_POST, $_FILES['fileToUpload']);
+            if (isset($response) && !empty($response)) {
+                $json = array(
+                    'status' => 200,
+                    'results' => $response
+                );
+            } else {
+                $json = array(
+                    'status' => 400,
+                    'total' => 0,
+                    'results' => "No hay registros"
+                );
+            }
         }
-        }
-        
+
         echo json_encode(
             $json,
             http_response_code($json["status"])
@@ -93,21 +118,30 @@ class coupon
 
     public function updateCoupon()
     {
-        $inputJSON = file_get_contents('php://input');
-        $object = json_decode($inputJSON);
-        $coupon = new CouponModel();
-        $response = $coupon->update($object);
-        if (isset($response) && !empty($response)) {
-            $json = array(
-                'status' => 200,
-                'results' => $response
-            );
-        } else {
+        $imagenDataExists = (isset($_FILES['fileToUpload']) && $_FILES['fileToUpload']['error'] === UPLOAD_ERR_OK);
+        if (!$imagenDataExists) {
             $json = array(
                 'status' => 400,
-                'total' => 0,
-                'results' => "No hay registros"
+                'results' => "No se creó el recurso"
             );
+            echo json_encode($json);
+        } else {
+            $inputJSON = file_get_contents('php://input');
+            $object = json_decode($inputJSON);
+            $coupon = new CouponModel();
+            $response = $coupon->update($_POST, $_FILES['fileToUpload']);
+            if (isset($response) && !empty($response)) {
+                $json = array(
+                    'status' => 200,
+                    'results' => $response
+                );
+            } else {
+                $json = array(
+                    'status' => 400,
+                    'total' => 0,
+                    'results' => "No hay registros"
+                );
+            }
         }
         echo json_encode(
             $json,

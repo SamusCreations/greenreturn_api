@@ -43,7 +43,7 @@ class CouponExchangeModel
     {
         try {
             // Consulta SQL
-            $vSql = "SELECT * FROM coupon_exchange WHERE id_coupon=$id";
+            $vSql = "SELECT * FROM coupon_exchange WHERE id_exchange=$id";
 
             // Ejecutar la consulta
             $vResultado = $this->enlace->ExecuteSQL($vSql);
