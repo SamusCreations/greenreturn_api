@@ -119,9 +119,12 @@ class MaterialModel
 			$target_dir = __DIR__ . "/photos/";
 			$target_name = $objeto['name'] . '.png';
 			$target_file = $target_dir . $target_name;
-			$imageTotal = 'http://localhost:81/greenreturn_api/models/photos/' . $target_name;
+			$imageTotal = 
+			'http://localhost:81/greenreturn_api/models/photos/' .
+			 $target_name;
 			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-				echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
+				echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"]))
+				 . " has been uploaded.";
 			} else {
 				echo "Sorry, there was an error uploading your file.";
 			}
@@ -152,12 +155,11 @@ class MaterialModel
 			//Consulta sql
 
 			$target_dir = __DIR__ . "/photos/";
-			$target_name = $objeto['name'] . '.png';
+			$target_name = $objeto['id_material'] . $objeto['name'] .'.png';
 			$target_file = $target_dir . $target_name;
 			$imageTotal = 'http://localhost:81/greenreturn_api/models/photos/' . $target_name;
 
-			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-				echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
+			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {				
 			} else {
 				echo "Sorry, there was an error uploading your file.";
 			}
@@ -174,7 +176,7 @@ class MaterialModel
 			//Ejecutar la consulta
 			$vResultado = $this->enlace->executeSQL_DML($vSql);
 			// Retornar el objeto actualizado
-			return $this->get($objeto->id_material);
+			return $this->get($objeto['id_material']);
 		} catch (Exception $e) {
 			die($e->getMessage());
 		}

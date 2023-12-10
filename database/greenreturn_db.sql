@@ -161,6 +161,7 @@ INSERT INTO `coupon` (`id_coupon`, `name`, `description`, `image_url`, `id_categ
 --
 
 CREATE TABLE `coupon_exchange` (
+  `id_exchange` int(11) NOT NULL,	
   `id_coupon` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `qr_url` varchar(100) DEFAULT NULL,
@@ -172,10 +173,10 @@ CREATE TABLE `coupon_exchange` (
 -- Dumping data for table `coupon_exchange`
 --
 
-INSERT INTO `coupon_exchange` (`id_coupon`, `id_user`, `qr_url`, `unit_cost`, `date_created`) VALUES
-(1, 5, 'qr', 50, '2023-10-31 22:39:04'),
-(2, 5, 'qr', 40, '2023-10-31 22:43:56'),
-(3, 5, 'qr', 60, '2023-10-31 22:45:03');
+INSERT INTO `coupon_exchange` (`id_exchange`, `id_coupon`, `id_user`, `qr_url`, `unit_cost`, `date_created`) VALUES
+(1, 1, 5, 'qr', 50, '2023-10-31 22:39:04'),
+(2, 2, 5, 'qr', 40, '2023-10-31 22:43:56'),
+(3, 3, 5, 'qr', 60, '2023-10-31 22:45:03');
 
 -- --------------------------------------------------------
 
@@ -466,9 +467,9 @@ ALTER TABLE `coupon`
 -- Indexes for table `coupon_exchange`
 --
 ALTER TABLE `coupon_exchange`
-  ADD PRIMARY KEY (`id_coupon`,`id_user`),
-  ADD KEY `idx_coupon_exchange` (`id_coupon`,`id_user`),
-  ADD KEY `fk2_coupon_exchange` (`id_user`);
+  ADD PRIMARY KEY (`id_exchange`),
+  ADD KEY `idx_coupon_exchange` (`id_exchange`),
+  ADD KEY `fk_coupon_exchange` (`id_user`, `id_coupon`);
 
 --
 -- Indexes for table `district`
@@ -576,6 +577,12 @@ ALTER TABLE `color`
 --
 ALTER TABLE `coupon`
   MODIFY `id_coupon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `coupon_exchange`
+--
+ALTER TABLE `coupon_exchange`
+  MODIFY `id_exchange` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `district`

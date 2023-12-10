@@ -227,6 +227,20 @@ class UserModel
         }
     }
 
+    public function discountCoins($objeto)
+    {
+        try {
+            $vSQL = "UPDATE user SET coin = coin  $objeto->coin WHERE id_user = $objeto->id_user;";
+
+            //Ejecutar la consulta
+            $vResultado = $this->enlace->executeSQL_DML($vSQL);
+            //Retornar el resultado
+            return $this->get($objeto->id_user);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function getWallet($id)
     {
         try {
