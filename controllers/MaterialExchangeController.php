@@ -98,7 +98,7 @@ class material_exchange
         } else {
             $json = array(
                 'status' => 400,
-                'results' => "No hay datos o no existe el User"
+                'results' => "No data found"
             );
         }
         echo json_encode(

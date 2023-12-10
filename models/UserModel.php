@@ -189,6 +189,29 @@ class UserModel
             die($e->getMessage());
         }
     }
+    public function changePassword($objeto)
+    {
+        try {
+
+            // Verificar si se proporcionó una nueva contraseña
+            if (isset($objeto->password) && $objeto->password != null) {
+                $crypt = password_hash($objeto->password, PASSWORD_BCRYPT);
+                $passwordUpdate = $crypt;
+            }
+
+            // Consulta SQL
+            $vSql = "UPDATE user SET password = '$passwordUpdate'
+                    WHERE id_user = $objeto->id_user";
+
+            // Ejecutar la consulta
+            $vResultado = $this->enlace->executeSQL_DML_last($vSql);
+
+            // Retornar el objeto actualizado
+            return $this->get($objeto->id_user);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 
     public function login($objeto)
     {
@@ -261,7 +284,7 @@ class UserModel
                 GROUP BY id_user;";
 
                 $vExchanged = $this->enlace->executeSQL($vSQL);
-                $vResultado->exchanged = !empty($vExchanged)? $vExchanged[0]: "0";
+                $vResultado->exchanged = !empty($vExchanged) ? $vExchanged[0] : "0";
 
             }
             //Retornar el resultado
