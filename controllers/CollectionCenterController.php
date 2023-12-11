@@ -79,6 +79,101 @@ class collection_center
 
     }
 
+    public function getCountByMaterial($param)
+    {
+        //Instancia del modelo
+        $center = new CollectionCenterModel();
+        //Acción del modelo a ejecutar
+        $response = $center->getCountByMaterial($param);
+        //Si hay respuesta
+        if (isset($response) && !empty($response)) {
+            //Armar el json
+            $json = array(
+                'status' => 200,
+                'results' => $response
+            );
+        } else {
+            $json = array(
+                'status' => 400,
+                'results' => "No hay registros"
+            );
+        }
+        echo json_encode($json,
+            http_response_code($json["status"])
+        );
+    }
+
+    public function getMonthExchanges($param)
+    {
+
+        $MaterialExchange = new CollectionCenterModel();
+        $response = $MaterialExchange->getMonthExchanges($param);
+        //Si hay respuesta
+        if (isset($response) && !empty($response)) {
+            //Armar el json
+            $json = array(
+                'status' => 200,
+                'results' => $response
+            );
+        } else {
+            $json = array(
+                'status' => 400,
+                'results' => "No hay registros"
+            );
+        }
+        echo json_encode($json,
+            http_response_code($json["status"])
+        );
+    }
+
+    public function getTotalCoins($param)
+    {
+        //Instancia del modelo
+        $center = new CollectionCenterModel();
+        //Acción del modelo a ejecutar
+        $response = $center->getTotalCoins($param);
+        //Si hay respuesta
+        if (isset($response) && !empty($response)) {
+            //Armar el json
+            $json = array(
+                'status' => 200,
+                'results' => $response
+            );
+        } else {
+            $json = array(
+                'status' => 400,
+                'results' => "No hay registros"
+            );
+        }
+        echo json_encode($json,
+            http_response_code($json["status"])
+        );
+    }
+
+    public function getCoinsByCollectionCenter($param)
+    {
+        //Instancia del modelo
+        $center = new CollectionCenterModel();
+        //Acción del modelo a ejecutar
+        $response = $center->getCoinsByCollectionCenter();
+        //Si hay respuesta
+        if (isset($response) && !empty($response)) {
+            //Armar el json
+            $json = array(
+                'status' => 200,
+                'results' => $response
+            );
+        } else {
+            $json = array(
+                'status' => 400,
+                'results' => "No hay registros"
+            );
+        }
+        echo json_encode($json,
+            http_response_code($json["status"])
+        );
+    }
+
     public function create()
     {
         $inputJSON = file_get_contents('php://input');

@@ -141,4 +141,42 @@ class CouponExchangeModel
             die($e->getMessage());
         }
     }
+
+    public function getTotalExchanges()
+    {
+        try {
+            // Consulta SQL
+            $vSql = "SELECT COUNT(*) AS total
+            FROM coupon_exchange
+            WHERE YEAR(date_created) = YEAR(CURRENT_DATE);
+            ";
+
+            // Ejecutar la consulta
+            $vResultado = $this->enlace->ExecuteSQL($vSql);
+
+            // Retornar el resultado como un array de objetos Coupon
+            return $vResultado;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+    
+    public function getTotalCoins()
+    {
+        try {
+            // Consulta SQL
+            $vSql = "SELECT SUM(unit_cost) AS total
+            FROM coupon_exchange
+            WHERE YEAR(date_created) = YEAR(CURRENT_DATE);            
+            ";
+
+            // Ejecutar la consulta
+            $vResultado = $this->enlace->ExecuteSQL($vSql);
+
+            // Retornar el resultado como un array de objetos Coupon
+            return $vResultado;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }

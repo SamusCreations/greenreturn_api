@@ -92,7 +92,7 @@ class MaterialExchangeModel
     /**
      * Obtiene el historial de intercambios de un centro de acopio por su ID.
      *
-     * @param int $id El ID del centro de acopio a buscar.
+     * @param int $id El ID del administrador del centro de acopio a buscar.
      * @return object|false Retorna un array de objetos MaterialExchange o false en caso de error o si no se encuentra el centro de acopio.
      */
     public function getCollectionCenterHistory($id_user)
@@ -114,8 +114,6 @@ class MaterialExchangeModel
         ORDER BY 
             me.date_created;        
         ";
-
-
             // Ejecutar la consulta
             $vResultado = $this->enlace->ExecuteSQL($vSql);
 
@@ -142,6 +140,33 @@ class MaterialExchangeModel
             JOIN collection_center cc ON me.id_collection_center = cc.id_collection_center
             WHERE u.id_user = $id
             ORDER BY me.date_created;";
+
+            // Ejecutar la consulta
+            $vResultado = $this->enlace->ExecuteSQL($vSql);
+
+            // Retornar el resultado como un array de objetos MaterialExchange
+            return $vResultado;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    /**
+     * Obtiene el total de canjes del año actual.
+     *
+     * @return object|false Retorna un array con la cantidad de canjes o false en caso de error o si no se encuentra el usuario.
+     */
+    public function getTotalExchanges()
+    {
+        try {
+            // Consulta SQL
+            $vSql = "  SELECT
+            COUNT(*) AS total
+          FROM
+            material_exchange
+          WHERE
+            MONTH(date_created) = MONTH(CURDATE())
+            AND YEAR(date_created) = YEAR(CURDATE());";
 
             // Ejecutar la consulta
             $vResultado = $this->enlace->ExecuteSQL($vSql);
