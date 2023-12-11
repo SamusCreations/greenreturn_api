@@ -112,6 +112,10 @@ class CouponExchangeModel
             // Ejecutar la consulta
             $vResultado = $this->enlace->executeSQL_DML_last($vSql);
 
+            $updateSql = "UPDATE `user` SET `coin` = `coin` - '$objeto->unit_cost' WHERE `id_user` = '$objeto->id_user'";
+
+        // Ejecutar la consulta de actualización en la tabla user
+        $updateResult = $this->enlace->executeSQL_DML_last($updateSql);
             // Retornar el cupón recién creado
             return $this->get($vResultado);
         } catch (Exception $e) {
