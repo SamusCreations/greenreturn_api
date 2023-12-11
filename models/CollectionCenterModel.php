@@ -156,8 +156,6 @@ class CollectionCenterModel
         }
     }
 
-
-
     public function create($objeto)
     {
         try {
@@ -207,6 +205,23 @@ class CollectionCenterModel
                 $sql = "INSERT INTO material_collection (id_material, id_collection_center) VALUES ($materialID, $objeto->id_collection_center)";
                 $this->enlace->executeSQL_DML($sql);
             }
+
+            //Retornar centro de acopio
+            return $this->get($objeto->id_collection_center);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function disable($objeto)
+    {
+        try {
+            //Consulta SQL
+            $vSql = "UPDATE collection_center SET active = $objeto->active 
+                WHERE id_collection_center = $objeto->id_collection_center";
+
+            //Ejecutar la consulta
+            $vResultado = $this->enlace->executeSQL_DML($vSql);
 
             //Retornar centro de acopio
             return $this->get($objeto->id_collection_center);
