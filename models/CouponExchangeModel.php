@@ -43,7 +43,9 @@ class CouponExchangeModel
     {
         try {
             // Consulta SQL
-            $vSql = "SELECT * FROM coupon_exchange WHERE id_exchange=$id";
+            $vSql = "SELECT ce.*, c.* FROM coupon_exchange ce 
+        JOIN coupon c ON ce.id_coupon = c.id_coupon
+        WHERE ce.id_exchange = $id";
 
             // Ejecutar la consulta
             $vResultado = $this->enlace->ExecuteSQL($vSql);
@@ -82,8 +84,9 @@ class CouponExchangeModel
     {
         try {
             // Consulta SQL
-            $vSql = "SELECT ce.*  FROM coupon_exchange ce 
+            $vSql = "SELECT ce.*, c.* FROM coupon_exchange ce 
             JOIN user u ON ce.id_user = u.id_user
+            JOIN coupon c ON ce.id_coupon = c.id_coupon
             WHERE u.id_user = $id ORDER BY ce.date_created;";
 
             // Ejecutar la consulta
@@ -112,6 +115,10 @@ class CouponExchangeModel
             // Ejecutar la consulta
             $vResultado = $this->enlace->executeSQL_DML_last($vSql);
 
+            $updateSql = "UPDATE `user` SET `coin` = `coin` - '$objeto->unit_cost' WHERE `id_user` = '$objeto->id_user'";
+
+        // Ejecutar la consulta de actualización en la tabla user
+        $updateResult = $this->enlace->executeSQL_DML_last($updateSql);
             // Retornar el cupón recién creado
             return $this->get($vResultado);
         } catch (Exception $e) {

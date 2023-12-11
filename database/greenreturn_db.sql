@@ -152,8 +152,11 @@ CREATE TABLE `coupon` (
 INSERT INTO `coupon` (`id_coupon`, `name`, `description`, `image_url`, `id_category`, `unit_cost`, `start_date`, `end_date`) VALUES
 (1, 'Movie Night Out', 'Enjoy a movie night with a loved one. Get two tickets for the price of one!', '../../assets/error.png', 1, 50, '2023-11-15 06:00:00', '2023-12-31 06:00:00'),
 (2, 'Adventure Park Pass', 'Experience an adventurous day at our local adventure park. Half-price entry for a thrilling time!', '../../assets/error.png', 1, 40, '2023-11-01 06:00:00', '2023-12-15 06:00:00'),
-(3, 'Live Music Concert', 'Rock out at a live music concert! Redeem this coupon for a discounted ticket to the hottest show in ', '../../assets/error.png', 1, 60, '2023-11-10 06:00:00', '2023-11-30 06:00:00');
-
+(3, 'Live Music Concert', 'Rock out at a live music concert! Redeem this coupon for a discounted ticket to the hottest show in ', '../../assets/error.png', 1, 60, '2023-11-10 06:00:00', '2023-11-30 06:00:00'),
+(13, 'Art Workshop Pass', 'Unleash your creativity at an art workshop! Learn from professional artists, explore different mediu', 'http://localhost:81/greenreturn_api/models/photos/Art Workshop Pass.png', 1, 35, '2023-12-08 00:00:00', '2023-12-15 00:00:00'),
+(14, 'Escape Room Adventure', 'Gather your team and test your wits in an escape room adventure! Solve puzzles, uncover mysteries, a', 'http://localhost:81/greenreturn_api/models/photos/Escape Room Adventure.png', 1, 45, '2023-12-07 00:00:00', '2023-12-22 00:00:00'),
+(15, 'Science Museum Pass', 'Embark on a journey of discovery at the science museum! This pass provides access to interactive exh', 'http://localhost:81/greenreturn_api/models/photos/Science Museum Pass.png', 5, 60, '2023-12-02 00:00:00', '2023-12-21 00:00:00'),
+(16, 'Mini Golf Fun Pack', 'Tee off on a mini golf adventure! This fun pack includes rounds of mini-golf for a group, along with', 'http://localhost:81/greenreturn_api/models/photos/Mini Golf Fun Pack.png', 6, 74, '2023-12-08 00:00:00', '2023-12-12 00:00:00');
 -- --------------------------------------------------------
 
 --
