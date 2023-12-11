@@ -308,7 +308,7 @@ class UserModel
                 GROUP BY id_user;";
 
                 $vExchanged = $this->enlace->executeSQL($vSQL);
-                $vResultado->exchanged = !empty($vExchanged) ? $vExchanged[0] : "0";
+                $vResultado->exchanged = !empty($vExchanged) ? $vExchanged[0]->exchanged : "0";
 
             }
             //Retornar el resultado

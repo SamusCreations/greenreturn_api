@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2023 at 10:47 PM
+-- Generation Time: Dec 11, 2023 at 03:40 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -62,7 +62,10 @@ CREATE TABLE `category` (
 INSERT INTO `category` (`id_category`, `name`) VALUES
 (1, 'Entertainment'),
 (2, 'Healthy Dining'),
-(3, 'Eco-Friendly Products');
+(3, 'Eco-Friendly Products'),
+(4, 'aaa'),
+(5, 'Educational Experiences'),
+(6, 'Outdoor Entertainment');
 
 -- --------------------------------------------------------
 
@@ -150,13 +153,14 @@ CREATE TABLE `coupon` (
 --
 
 INSERT INTO `coupon` (`id_coupon`, `name`, `description`, `image_url`, `id_category`, `unit_cost`, `start_date`, `end_date`) VALUES
-(1, 'Movie Night Out', 'Enjoy a movie night with a loved one. Get two tickets for the price of one!', '../../assets/error.png', 1, 50, '2023-11-15 06:00:00', '2023-12-31 06:00:00'),
-(2, 'Adventure Park Pass', 'Experience an adventurous day at our local adventure park. Half-price entry for a thrilling time!', '../../assets/error.png', 1, 40, '2023-11-01 06:00:00', '2023-12-15 06:00:00'),
+(1, 'Movie Night Out', 'Enjoy a movie night with a loved one. Get two tickets for the price of one!', 'http://localhost:81/greenreturn_api/models/photos/1Movie Night Out.png', 1, 50, '2023-11-15 06:00:00', '2023-12-31 06:00:00'),
+(2, 'Adventure Park Pass', 'Experience an adventurous day at our local adventure park. Half-price entry for a thrilling time!', 'http://localhost:81/greenreturn_api/models/photos/2Adventure Park Pass.png', 1, 40, '2023-11-01 06:00:00', '2023-12-15 06:00:00'),
 (3, 'Live Music Concert', 'Rock out at a live music concert! Redeem this coupon for a discounted ticket to the hottest show in ', '../../assets/error.png', 1, 60, '2023-11-10 06:00:00', '2023-11-30 06:00:00'),
-(13, 'Art Workshop Pass', 'Unleash your creativity at an art workshop! Learn from professional artists, explore different mediu', 'http://localhost:81/greenreturn_api/models/photos/Art Workshop Pass.png', 1, 35, '2023-12-08 00:00:00', '2023-12-15 00:00:00'),
-(14, 'Escape Room Adventure', 'Gather your team and test your wits in an escape room adventure! Solve puzzles, uncover mysteries, a', 'http://localhost:81/greenreturn_api/models/photos/Escape Room Adventure.png', 1, 45, '2023-12-07 00:00:00', '2023-12-22 00:00:00'),
-(15, 'Science Museum Pass', 'Embark on a journey of discovery at the science museum! This pass provides access to interactive exh', 'http://localhost:81/greenreturn_api/models/photos/Science Museum Pass.png', 5, 60, '2023-12-02 00:00:00', '2023-12-21 00:00:00'),
-(16, 'Mini Golf Fun Pack', 'Tee off on a mini golf adventure! This fun pack includes rounds of mini-golf for a group, along with', 'http://localhost:81/greenreturn_api/models/photos/Mini Golf Fun Pack.png', 6, 74, '2023-12-08 00:00:00', '2023-12-12 00:00:00');
+(13, 'Art Workshop Pass', 'Unleash your creativity at an art workshop! Learn from professional artists, explore different mediu', 'http://localhost:81/greenreturn_api/models/photos/Art Workshop Pass.png', 1, 35, '2023-12-08 06:00:00', '2023-12-15 06:00:00'),
+(14, 'Escape Room Adventure', 'Gather your team and test your wits in an escape room adventure! Solve puzzles, uncover mysteries, a', 'http://localhost:81/greenreturn_api/models/photos/Escape Room Adventure.png', 1, 45, '2023-12-07 06:00:00', '2023-12-22 06:00:00'),
+(15, 'Science Museum Pass', 'Embark on a journey of discovery at the science museum! This pass provides access to interactive exh', 'http://localhost:81/greenreturn_api/models/photos/Science Museum Pass.png', 5, 60, '2023-12-02 06:00:00', '2023-12-21 06:00:00'),
+(16, 'Mini Golf Fun Pack', 'Tee off on a mini golf adventure! This fun pack includes rounds of mini-golf for a group, along with', 'http://localhost:81/greenreturn_api/models/photos/Mini Golf Fun Pack.png', 6, 74, '2023-12-08 06:00:00', '2023-12-12 06:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -164,7 +168,7 @@ INSERT INTO `coupon` (`id_coupon`, `name`, `description`, `image_url`, `id_categ
 --
 
 CREATE TABLE `coupon_exchange` (
-  `id_exchange` int(11) NOT NULL,	
+  `id_exchange` int(11) NOT NULL,
   `id_coupon` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `qr_url` varchar(100) DEFAULT NULL,
@@ -179,7 +183,13 @@ CREATE TABLE `coupon_exchange` (
 INSERT INTO `coupon_exchange` (`id_exchange`, `id_coupon`, `id_user`, `qr_url`, `unit_cost`, `date_created`) VALUES
 (1, 1, 5, 'qr', 50, '2023-10-31 22:39:04'),
 (2, 2, 5, 'qr', 40, '2023-10-31 22:43:56'),
-(3, 3, 5, 'qr', 60, '2023-10-31 22:45:03');
+(3, 3, 5, 'qr', 60, '2023-10-31 22:45:03'),
+(4, 1, 1, 'sdc', 5, '2023-12-09 00:47:59'),
+(5, 1, 1, 'sdc', 5, '2023-12-09 00:48:43'),
+(6, 1, 1, 'plpl', 5, '2023-12-09 00:54:10'),
+(7, 1, 1, 'plpl', 5, '2023-12-09 00:55:28'),
+(15, 14, 9, '', 45, '2023-12-10 23:08:35'),
+(16, 15, 9, '', 60, '2023-12-11 02:42:33');
 
 -- --------------------------------------------------------
 
@@ -264,7 +274,7 @@ INSERT INTO `material` (`id_material`, `name`, `description`, `image_url`, `id_m
 (6, 'Bronze', 'Acceptable in the form of sculptures, statues, or industrial scraps.', 'http://localhost:81/greenreturn_api/models/photos/bronze.png', 1, 15, 14),
 (7, 'Copper', 'Accepted in various forms, including wires, pipes, or electrical components.', 'http://localhost:81/greenreturn_api/models/photos/copper.png', 1, 25, 15),
 (8, 'Sheet metal', 'Accepted in various forms, including steel, aluminum, or copper sheets used in construction.', 'http://localhost:81/greenreturn_api/models/photos/sheet metal.png', 1, 4, 16),
-(9, 'Carbide', 'Acceptable in solid forms, like cutting tools or machine parts.', 'http://localhost:81/greenreturn_api/models/photos/carbide.png', 1, 8, 17),
+(9, 'Carbide', 'Acceptable in solid forms, like cutting tools or machine parts.', 'http://localhost:81/greenreturn_api/models/photos/9Carbide.png', 1, 8, 17),
 (10, 'Stainless steel', 'Accepted in a variety of forms, such as kitchenware, appliances, and structural components.', 'http://localhost:81/greenreturn_api/models/photos/stainless steel.png', 1, 12, 18);
 
 -- --------------------------------------------------------
@@ -414,14 +424,15 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `email`, `password`, `id_role`, `identification`, `name`, `surname`, `telephone`, `id_province`, `id_canton`, `id_district`, `address`, `coin`, `active`) VALUES
-(1, 'Samirr022004@gmail.com', '123456', 1, 208500499, 'Samuel', 'Romero Ramirez', 83211179, 1, 1, 1, 'Calle Bambúr', 0, 0x31),
-(2, 'Dapp0204@gmail.com', '654321', 2, 208490543, 'Carlos', 'Ruiz Vargas', 84695321, 2, 2, 2, 'Calle Almendros', 0, 0x31),
-(3, 'Luis2000@gmail.com', '123456', 2, 208470295, 'Luis', 'Rodriguez Lopez', 65789658, 3, 3, 3, 'Calle Rosas', 0, 0x31),
-(4, 'Sof0345@gmail.com', '654321', 2, 208480789, 'Sofia', 'Valverde Gomez', 87463215, 3, 3, 3, 'Calle Canto', 0, 0x31),
-(5, 'Laura123@gmail.com', '123456', 3, 207900487, 'Laura', 'Zamora Solorzano', 69854732, 1, 1, 1, 'Calle Verde', 0, 0x31),
-(6, 'raquelrg@gmail.com', '123456', 2, 107900384, 'Raquel', 'Rodriguez Gomez', 63214598, 1, 1, 1, 'Calle Conejo', 0, 0x31),
-(7, 'sararam@gmail.com', '123456', 2, 901000893, 'Sara', 'Ramirez chaves', 89657412, 1, 1, 1, 'Calle Estadio', 0, 0x31),
-(8, 'elci@gmail.com', '123456', 2, 208500593, 'Elci', 'Garro Mata', 65987432, 1, 1, 1, 'Calle Cigarro', 0, 0x31);
+(1, 'Samirr022004@gmail.com', '$2y$10$PPtz9FIly.gYtw5A8BkxhOGXZn8KPtMO3V70aD8Zjg8y4YoLd3Li6', 1, 208500499, 'Samuel', 'Romero Ramirez', 83211179, 1, 1, 1, 'Calle Bambú', 11, 0x31),
+(2, 'Dapp0204@gmail.com', '$2y$10$MRd1IQZ5nAii2PrFuMk7ueXBXOiR/ffVsUQga9CqHbRYFBXR4qZZm', 2, 208490543, 'Carlos', 'Ruiz Vargas', 84695321, 2, 2, 2, 'Calle Almendros', 0, 0x31),
+(3, 'Luis2000@gmail.com', '$2y$10$oi.pEkOSnQb.BpaVZ7Nb3ehiPRp2TFpD8SA7pol9FOy9.58chUUCe', 2, 208470295, 'Luis', 'Rodriguez Lopez', 65789658, 3, 3, 3, 'Calle Rosas', 0, 0x31),
+(4, 'Sof0345@gmail.com', '$2y$10$61C0/sn5HW2HBKKyMBM4K.IenHpBfC9l5iQZw6.S0jdjcBZVJStfW', 2, 208480789, 'Sofia', 'Valverde Gomez', 87463215, 3, 3, 3, 'Calle Canto', 0, 0x31),
+(5, 'Laura123@gmail.com', '$2y$10$rIE4HDy2Ge.yT4RVikATu.4emMtDeJoWy0OPtUH1OH.66BDilLb6a', 3, 207900487, 'Laura', 'Zamora Solorzano', 69854732, 1, 1, 1, 'Calle Verde', 221, 0x31),
+(6, 'raquelrg@gmail.com', '$2y$10$kJgaiwTQTq148yeqjrno7.8XxRvG8fQgFhcSlSfL3b.UqTspAjZQq', 2, 107900384, 'Raquel', 'Rodriguez Gomez', 63214598, 1, 1, 1, 'Calle Conejo', 0, 0x31),
+(7, 'sararam@gmail.com', '$2y$10$ZQ/fYh7C.//mH5Tf542TIO4Fw9KJj.CfRo3PkZF4MdAWfFmrNnJHe', 2, 901000893, 'Sara', 'Ramirez chaves', 89657412, 1, 1, 1, 'Calle Estadio', 0, 0x31),
+(8, 'elci@gmail.com', '$2y$10$Ii76g63dcOwHKsqAP5ub8epLrz0Nyo0eorYTe6zUQLotIYRjHxLte', 2, 208500593, 'Elci', 'Garro Mata', 65987432, 1, 1, 1, 'Calle Cigarro', 0, 0x31),
+(9, 'luija2000@gmail.com', '$2y$10$KQIvhj9LHCg7m6GJ22NTEu6kY/L.vTZp4OATjMDzMO034Fp6bowuq', 3, 123456789, 'Luis', 'Campos', NULL, NULL, NULL, NULL, NULL, 140, 0x31);
 
 --
 -- Indexes for dumped tables
@@ -472,7 +483,8 @@ ALTER TABLE `coupon`
 ALTER TABLE `coupon_exchange`
   ADD PRIMARY KEY (`id_exchange`),
   ADD KEY `idx_coupon_exchange` (`id_exchange`),
-  ADD KEY `fk_coupon_exchange` (`id_user`, `id_coupon`);
+  ADD KEY `fk_coupon_exchange` (`id_user`,`id_coupon`),
+  ADD KEY `fk1_coupon_exchange` (`id_coupon`);
 
 --
 -- Indexes for table `district`
@@ -561,7 +573,7 @@ ALTER TABLE `canton`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `collection_center`
@@ -579,13 +591,13 @@ ALTER TABLE `color`
 -- AUTO_INCREMENT for table `coupon`
 --
 ALTER TABLE `coupon`
-  MODIFY `id_coupon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_coupon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `coupon_exchange`
 --
 ALTER TABLE `coupon_exchange`
-  MODIFY `id_exchange` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_exchange` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `district`
@@ -627,7 +639,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
