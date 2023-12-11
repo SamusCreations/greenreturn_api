@@ -43,7 +43,9 @@ class CouponExchangeModel
     {
         try {
             // Consulta SQL
-            $vSql = "SELECT * FROM coupon_exchange WHERE id_exchange=$id";
+            $vSql = "SELECT ce.*, c.* FROM coupon_exchange ce 
+        JOIN coupon c ON ce.id_coupon = c.id_coupon
+        WHERE ce.id_exchange = $id";
 
             // Ejecutar la consulta
             $vResultado = $this->enlace->ExecuteSQL($vSql);
@@ -82,8 +84,9 @@ class CouponExchangeModel
     {
         try {
             // Consulta SQL
-            $vSql = "SELECT ce.*  FROM coupon_exchange ce 
+            $vSql = "SELECT ce.*, c.* FROM coupon_exchange ce 
             JOIN user u ON ce.id_user = u.id_user
+            JOIN coupon c ON ce.id_coupon = c.id_coupon
             WHERE u.id_user = $id ORDER BY ce.date_created;";
 
             // Ejecutar la consulta
